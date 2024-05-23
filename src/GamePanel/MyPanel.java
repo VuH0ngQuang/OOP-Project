@@ -25,7 +25,7 @@ public class MyPanel extends JPanel implements Runnable {
      // create object
      Thread gameThread;
      KeyMoving keyMoving = new KeyMoving();
-     Player player = new Player(this, keyMoving, 5, 5, 4, 5, 5);
+     Player player = new Player(this, keyMoving, 5, 5, 4, 3, 3);
 
      // Panel
      public MyPanel() {
