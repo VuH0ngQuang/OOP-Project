@@ -39,6 +39,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OOP-Project\Resources\Title" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -70,6 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710913801153</updated>
       <workItem from="1716470423102" duration="4093000" />
+      <workItem from="1716546473700" duration="330000" />
     </task>
     <servers />
   </component>
