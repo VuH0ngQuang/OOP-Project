@@ -1,4 +1,4 @@
-import Graphic.*;
+import GamePanel.*;
 
 public class Main {
     public static void main(String[] args) {

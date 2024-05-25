@@ -1,4 +1,4 @@
-package Graphic;
+package GamePanel;
 
 import javax.swing.*;
 

@@ -1,7 +1,9 @@
-package Graphic;
+package GamePanel;
 
 import KeyControl.*;
 import Entity.*;
+import Title.TitleManager;
+
 import java.awt.*;
 
 import javax.swing.JPanel;
@@ -9,20 +11,18 @@ import javax.swing.JPanel;
 public class MyPanel extends JPanel implements Runnable {
 
      // specifications
-     private final int originaltileSize = 16; // 16
+     private final int originalTileSize = 16; // 16
 
-     private final int width_character = getOriginaltileSize() * 5; // 80
-     private final int height_character = getOriginaltileSize() * 5; // 80
+     private final int maxScreenCol = 81;
+     private final int maxScreenRow =45;
 
-     private final int maxScreenCol = 80;
-     private final int maxScreenRow = 45;
-
-     private final int screenWidth = getOriginaltileSize() * maxScreenCol; // 1280
-     private final int screenHeight = getOriginaltileSize() * maxScreenRow; // 720
+     private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
+     private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
 
      private final int FPS = 60;
 
      // create object
+     TitleManager titleManager = new TitleManager(this);
      Thread gameThread;
      KeyMoving keyMoving = new KeyMoving();
      Player player = new Player(this, keyMoving, 5, 5, 4, 3, 3);
@@ -47,7 +47,7 @@ public class MyPanel extends JPanel implements Runnable {
      @Override
      public void run() {
 
-          double drawInterval = 1000000000 / get_FPS(); // 0.0167 seconds 1second into nanosecond
+          double drawInterval = 1000000000.0 / get_FPS(); // 0.0167 seconds 1second into nanosecond
           double delta = 0;
           long lastTime = System.nanoTime();
           long currentTime;
@@ -96,7 +96,9 @@ public class MyPanel extends JPanel implements Runnable {
      public void paintComponent(Graphics g) {
 
           super.paintComponent(g);
-
+          //draw floor
+          Graphics2D g2 = (Graphics2D)g;
+          titleManager.draw(g2);
           // draw player
           player.draw(g);
 
@@ -114,23 +116,15 @@ public class MyPanel extends JPanel implements Runnable {
      }
 
      public int getMaxScreenRow() {
-          return maxScreenRow;
+          return maxScreenRow/3;
      }
 
      public int getMaxScreenCol() {
-          return maxScreenCol;
+          return maxScreenCol/3;
      }
 
-     public int get_height_character() {
-          return height_character;
-     }
-
-     public int get_width_character() {
-          return width_character;
-     }
-
-     public int getOriginaltileSize() {
-          return originaltileSize;
+     public int getOriginalTileSize() {
+          return originalTileSize;
      }
 
      public int get_FPS() {

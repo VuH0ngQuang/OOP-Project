@@ -1,14 +1,11 @@
 package Entity;
 
-import java.awt.Color;
+import GamePanel.*;
+import KeyControl.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
-import Graphic.*;
-import KeyControl.*;
 
 public class Player extends Entity {
      // object create
@@ -17,9 +14,9 @@ public class Player extends Entity {
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
-          super(myPanel.getOriginaltileSize() * x, myPanel.getOriginaltileSize() * y,
+          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y,
                     speed,
-                    myPanel.getOriginaltileSize() * height, myPanel.getOriginaltileSize() * width);
+                    myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
           getPlayerImage();
