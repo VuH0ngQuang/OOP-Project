@@ -19,7 +19,9 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2dwKeq73oKnPXTsv2TITcOUnaqJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -31,6 +33,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/OOP-Project/Resources/Player&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -40,7 +43,11 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OOP-Project\Resources\Player" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OOP-Project\Resources\Player" />
       <recent name="D:\OOP-Project\Resources\Title" />
     </key>
   </component>
@@ -75,7 +82,8 @@
       <option name="presentableId" value="Default" />
       <updated>1710913801153</updated>
       <workItem from="1716470423102" duration="4093000" />
-      <workItem from="1716546473700" duration="330000" />
+      <workItem from="1716546473700" duration="2645000" />
+      <workItem from="1716605968213" duration="1580000" />
     </task>
     <servers />
   </component>
