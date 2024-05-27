@@ -1,5 +1,6 @@
 package GamePanel;
 
+import CollisionChecker.CollisionChecker;
 import KeyControl.*;
 import Entity.*;
 import Title.TitleManager;
@@ -22,10 +23,11 @@ public class MyPanel extends JPanel implements Runnable {
      private final int FPS = 60;
 
      // create object
-     TitleManager titleManager = new TitleManager(this);
+     public TitleManager titleManager = new TitleManager(this);
      Thread gameThread;
+     public CollisionChecker collisionChecker = new CollisionChecker(this);
      KeyMoving keyMoving = new KeyMoving();
-     Player player = new Player(this, keyMoving, 5, 5, 4, 3, 3);
+     public Player player = new Player(this, keyMoving, originalTileSize * 3 * 3, originalTileSize * 3 *2, 4, 3, 3); // set default starting position at 3:2
 
      // Panel
      public MyPanel() {
@@ -37,6 +39,11 @@ public class MyPanel extends JPanel implements Runnable {
           this.setFocusable(true);
 
      }
+     //WORLD SETTINGS
+     public final int maxWorldCol = 50;
+     public final int maxWorldRow = 50;
+     public final int maxWorldWidth = originalTileSize * 3 * maxWorldCol;
+     public final int maxWorldHeight = originalTileSize * 3 * maxWorldCol;
 
      // create to stare game loop
      public void startGameThread() {
@@ -130,4 +137,9 @@ public class MyPanel extends JPanel implements Runnable {
      public int get_FPS() {
           return FPS;
      }
+     public int getMaxWorldCol(){ return maxWorldCol; };
+     public int getMaxWorldRow(){ return maxWorldRow; };
+     public int getMaxWorldWidth(){ return maxWorldWidth; };
+     public int getMaxWorldHeight(){ return maxWorldHeight; }
+
 }

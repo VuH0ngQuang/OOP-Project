@@ -2,7 +2,8 @@ package Entity;
 
 import GamePanel.*;
 import KeyControl.*;
-import java.awt.Graphics;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -12,6 +13,9 @@ public class Player extends Entity {
      MyPanel myPanel;
      KeyMoving keyMoving;
 
+     public  final int screenX;
+     public  final int screenY;
+
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
           super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y,
@@ -19,6 +23,14 @@ public class Player extends Entity {
                     myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
+          //set camera at the center of the screen
+          screenX = myPanel.getScreenWidth()/2 - (myPanel.getOriginalTileSize()*3/2);
+          screenY = myPanel.getScreenHeight()/2 - (myPanel.getOriginalTileSize()*3/2);
+          solidArea = new Rectangle();
+          solidArea.x = 8;
+          solidArea.y = 16;
+          solidArea.width = 32;
+          solidArea.height = 32;
           getPlayerImage();
           set_direction("down");
      }
@@ -28,31 +40,46 @@ public class Player extends Entity {
 
           if (keyMoving.getUp() == true) {
                set_direction("up");
-               set_y(get_y() - get_speed());
           }
 
           if (keyMoving.getDown() == true) {
                set_direction("down");
-               set_y(get_y() + get_speed());
           }
 
           if (keyMoving.getLeft() == true) {
                set_direction("left");
-               set_x(get_x() - get_speed());
           }
 
           if (keyMoving.getRight() == true) {
                set_direction("right");
-               set_x(get_x() + get_speed());
           }
 
           // Make it always face out of the screen when the button is not pressed
           if (keyMoving.getRight() == false && keyMoving.getLeft() == false &&
                     keyMoving.getUp() == false
                     && keyMoving.getDown() == false) {
-               set_direction("down");
+//               set_direction("down");
           }
-
+          //CHECK TILE COLLISION
+          boolean collisionOn = false;
+          myPanel.collisionChecker.checkTile(this);
+          //IF COLLISION IS FALSE, PLAYER CAN MOVE
+          if(!collisionOn){
+               switch (get_direction()){
+                    case "up":
+                         set_worldY(get_worldY() - get_speed());
+                         break;
+                    case "down":
+                         set_worldY(get_worldY() + get_speed());
+                         break;
+                    case "left":
+                         set_worldX(get_worldX() - get_speed());
+                         break;
+                    case "right":
+                         set_worldX(get_worldX() + get_speed());
+                         break;
+               }
+          }
           // Changes the displayed image every 12 frames
           set_spriteCounter(get_spriteCounter() + 1);
           if (get_spriteCounter() > 12) {
@@ -69,7 +96,7 @@ public class Player extends Entity {
      // draw graphics
      public void draw(Graphics g) {
           // g.setColor(Color.white);
-          // g.fillRect(get_x(), get_y(), get_width(), get_height());
+          // g.fillRect(get_worldX(), get_worldY(), get_width(), get_height());
 
           BufferedImage image = null;
 
@@ -115,7 +142,7 @@ public class Player extends Entity {
                     break;
           }
 
-          g.drawImage(image, get_x(), get_y(), get_width(), get_height(), myPanel);
+          g.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
      }
 
      // image input
@@ -134,4 +161,8 @@ public class Player extends Entity {
                e.printStackTrace();
           }
      }
+
+     public int getScreenX() { return screenX; }
+
+     public int getScreenY() { return screenY; }
 }

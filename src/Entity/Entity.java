@@ -1,35 +1,36 @@
 package Entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-     private int x, y, speed, height, width, spriteNum = 1, spriteCounter = 0;
+     private int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
      private BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
      private String direction;
+     public Rectangle solidArea;
+     public boolean collisionOn = false;
 
      Entity(int x, int y, int speed, int height, int width) {
-          this.x = x;
-          this.y = y;
+          this.worldX = x;
+          this.worldY = y;
           this.speed = speed;
           this.width = width;
           this.height = height;
      }
 
      // set and get
-     public void set_x(int x) {
-          this.x = x;
+     public void set_worldX(int x) { this.worldX = x; }
+
+     public int get_worldX() {
+          return worldX;
      }
 
-     public int get_x() {
-          return x;
+     public void set_worldY(int y) {
+          this.worldY = y;
      }
 
-     public void set_y(int y) {
-          this.y = y;
-     }
-
-     public int get_y() {
-          return y;
+     public int get_worldY() {
+          return worldY;
      }
 
      public void set_speed(int speed) {

@@ -12,15 +12,15 @@ import java.io.InputStreamReader;
 public class TitleManager {
 
     MyPanel mp;
-    Title[] title;
-    int mapTileNum[][];
+    public Title[] title;
+    public int mapTileNum[][];
 
 
     public TitleManager(MyPanel mp){
         this.mp = mp;
 
         title = new Title[10];
-        mapTileNum = new int[mp.getMaxScreenCol()][mp.getMaxScreenCol()];
+        mapTileNum = new int[mp.getMaxWorldCol()][mp.getMaxWorldRow()];
 
         getTileImage();
         loadMap("/Maps/map01.txt"); // put map location here
@@ -31,6 +31,7 @@ public class TitleManager {
         try {
             title[0] = new Title();
             title[0].image = ImageIO.read(getClass().getResourceAsStream("/Title/wall.png"));
+            title[0].collision = true;
             title[1] = new Title();
             title[1].image = ImageIO.read(getClass().getResourceAsStream("/Title/floor_1.png"));
             title[2] = new Title();
@@ -47,15 +48,15 @@ public class TitleManager {
             int col = 0;
             int row = 0;
 
-            while (col < mp.getMaxScreenCol() && row < mp.getMaxScreenRow()){
+            while (col < mp.getMaxWorldCol() && row < mp.getMaxWorldRow()){
                 String line = br.readLine();
-                while (col <  mp.getMaxScreenCol()){ // get the first row data from txt to create the map
-                    String numbers[] = line.split(" ");
+                while (col <  mp.getMaxWorldCol()){ // get the first row data from txt to create the map
+                    String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
                 } // read next line of the file txt
-                if(col == mp. getMaxScreenCol()){
+                if(col == mp. getMaxWorldCol()){
                     col =0;
                     row++;
                 }
@@ -66,22 +67,26 @@ public class TitleManager {
         }
     }
     public void draw(Graphics2D g2){
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0 ;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while ((col < mp.getMaxScreenCol() && row < mp.getMaxScreenRow())){
-            int tileNum = mapTileNum[col][row];
-            g2.drawImage(title[tileNum].image,x ,y, mp.getOriginalTileSize()*3, mp.getOriginalTileSize()*3, null);
-            col++;
-            x += mp.getOriginalTileSize()*3;
+        while ((worldCol < mp.getMaxWorldCol() && worldRow < mp.getMaxWorldRow())){
+            int tileNum = mapTileNum[worldCol][worldRow];
+            int worldX = worldCol * mp.getOriginalTileSize()*3;
+            int worldY = worldRow * mp.getOriginalTileSize()*3;
+            int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
+            int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
 
-            if(col == mp.getMaxScreenCol()){
-                col = 0;
-                x = 0;
-                row++;
-                y += mp.getOriginalTileSize()*3;
+            if(worldX + mp.getOriginalTileSize() * 3  > mp.player.get_worldX() - mp.player.screenX &&
+               worldX - mp.getOriginalTileSize() *3 < mp.player.get_worldX() + mp.player.screenX &&
+               worldY + mp.getOriginalTileSize() * 3 > mp.player.get_worldY() - mp.player.screenY &&
+               worldY - mp.getOriginalTileSize() * 3 < mp.player.get_worldY() + mp.player.screenY){
+                g2.drawImage(title[tileNum].image,screenX ,screenY, mp.getOriginalTileSize()*3, mp.getOriginalTileSize()*3, null);
+            }
+            worldCol++;
+            if(worldCol == mp.getMaxWorldCol()){
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
