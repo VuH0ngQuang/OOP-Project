@@ -83,8 +83,7 @@ public class MyPanel extends JPanel implements Runnable {
                     // refresh information
                     update();
                     // Represents the elements
-                    if (player.get_direction() != "stand")
-                         repaint();
+                    repaint();
                     delta--;
                     drawCount++;
                }

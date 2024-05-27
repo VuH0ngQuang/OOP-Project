@@ -32,65 +32,69 @@ public class Player extends Entity {
           solidArea.width = 32;
           solidArea.height = 32;
           getPlayerImage();
+          set_direction("down");
      }
 
      // update value
      public void update() {
-
-          if (keyMoving.getUp() == true) {
-               set_direction("up");
-          }
-
-          if (keyMoving.getDown() == true) {
-               set_direction("down");
-          }
-
-          if (keyMoving.getLeft() == true) {
-               set_direction("left");
-          }
-
-          if (keyMoving.getRight() == true) {
-               set_direction("right");
-          }
-
-          // Make it always face out of the screen when the button is not pressed
-          if (keyMoving.getRight() == false && keyMoving.getLeft() == false &&
-                    keyMoving.getUp() == false
-                    && keyMoving.getDown() == false) {
-               set_direction("stand");
-          }
-          // //CHECK TILE COLLISION
-          // boolean collisionOn = false;
-          myPanel.collisionChecker.checkTile(this);
-          // IF COLLISION IS FALSE, PLAYER CAN MOVE
-          if (collisionOn == false) {
-
-               switch (get_direction()) {
-                    case "up":
-                         set_worldY(get_worldY() - get_speed());
-                         break;
-                    case "down":
-                         set_worldY(get_worldY() + get_speed());
-                         break;
-                    case "left":
-                         set_worldX(get_worldX() - get_speed());
-                         break;
-                    case "right":
-                         set_worldX(get_worldX() + get_speed());
-                         break;
-                    case "stand":
-                         break;
+          if (keyMoving.getRight() == true || keyMoving.getLeft() == true ||
+                    keyMoving.getUp() == true
+                    || keyMoving.getDown() == true) {
+               if (keyMoving.getUp() == true) {
+                    set_direction("up");
                }
-          }
-          // Changes the displayed image every 12 frames
-          set_spriteCounter(get_spriteCounter() + 1);
-          if (get_spriteCounter() > 12) {
-               if (get_spriteNum() == 1) {
-                    set_spriteNum(2);
-               } else if (get_spriteNum() == 2) {
-                    set_spriteNum(1);
+
+               if (keyMoving.getDown() == true) {
+                    set_direction("down");
                }
-               set_spriteCounter(0);
+
+               if (keyMoving.getLeft() == true) {
+                    set_direction("left");
+               }
+
+               if (keyMoving.getRight() == true) {
+                    set_direction("right");
+               }
+
+               // Make it always face out of the screen when the button is not pressed
+               // if (keyMoving.getRight() == false && keyMoving.getLeft() == false &&
+               // keyMoving.getUp() == false
+               // && keyMoving.getDown() == false) {
+               // set_direction("stand");
+               // }
+               // //CHECK TILE COLLISION
+               collisionOn = false;
+               myPanel.collisionChecker.checkTile(this);
+               // IF COLLISION IS FALSE, PLAYER CAN MOVE
+               if (collisionOn == false) {
+
+                    switch (get_direction()) {
+                         case "up":
+                              set_worldY(get_worldY() - get_speed());
+                              break;
+                         case "down":
+                              set_worldY(get_worldY() + get_speed());
+                              break;
+                         case "left":
+                              set_worldX(get_worldX() - get_speed());
+                              break;
+                         case "right":
+                              set_worldX(get_worldX() + get_speed());
+                              break;
+                         // case "stand":
+                         // break;
+                    }
+               }
+               // Changes the displayed image every 12 frames
+               set_spriteCounter(get_spriteCounter() + 1);
+               if (get_spriteCounter() > 12) {
+                    if (get_spriteNum() == 1) {
+                         set_spriteNum(2);
+                    } else if (get_spriteNum() == 2) {
+                         set_spriteNum(1);
+                    }
+                    set_spriteCounter(0);
+               }
           }
 
      }
@@ -139,9 +143,9 @@ public class Player extends Entity {
                     }
                     break;
 
-               case "stand":
-                    image = get_down1();
-                    break;
+               // case "stand":
+               // image = get_down1();
+               // break;
 
                default:
                     break;

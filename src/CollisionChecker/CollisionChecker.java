@@ -37,8 +37,7 @@ public class CollisionChecker {
                 tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow];
                 if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
                     entity.collisionOn = true;
-                } else
-                    entity.collisionOn = false;
+                }
                 break;
             case "left":
                 entityLeftCol = (entityLeftWorldX - entity.get_speed()) / (mp.getOriginalTileSize() * 3);
@@ -46,8 +45,7 @@ public class CollisionChecker {
                 tileNum2 = mp.titleManager.mapTileNum[entityLeftCol][entityBottomRow];
                 if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
                     entity.collisionOn = true;
-                } else
-                    entity.collisionOn = false;
+                }
                 break;
             case "right":
                 entityRightCol = (entityRightWorldX + entity.get_speed()) / (mp.getOriginalTileSize() * 3);
@@ -55,12 +53,11 @@ public class CollisionChecker {
                 tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow];
                 if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
                     entity.collisionOn = true;
-                } else
-                    entity.collisionOn = false;
+                }
                 break;
 
-            case "stand":
-                break;
+            // case "stand":
+            // break;
         }
     }
 }
