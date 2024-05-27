@@ -13,8 +13,8 @@ public class Player extends Entity {
      MyPanel myPanel;
      KeyMoving keyMoving;
 
-     public  final int screenX;
-     public  final int screenY;
+     public final int screenX;
+     public final int screenY;
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
@@ -23,9 +23,9 @@ public class Player extends Entity {
                     myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
-          //set camera at the center of the screen
-          screenX = myPanel.getScreenWidth()/2 - (myPanel.getOriginalTileSize()*3/2);
-          screenY = myPanel.getScreenHeight()/2 - (myPanel.getOriginalTileSize()*3/2);
+          // set camera at the center of the screen
+          screenX = myPanel.getScreenWidth() / 2 - (myPanel.getOriginalTileSize() * 3 / 2);
+          screenY = myPanel.getScreenHeight() / 2 - (myPanel.getOriginalTileSize() * 3 / 2);
           solidArea = new Rectangle();
           solidArea.x = 8;
           solidArea.y = 16;
@@ -38,51 +38,50 @@ public class Player extends Entity {
      // update value
      public void update() {
 
+          if (keyMoving.getUp() == true) {
+               set_direction("up");
+          }
+
+          if (keyMoving.getDown() == true) {
+               set_direction("down");
+          }
+
+          if (keyMoving.getLeft() == true) {
+               set_direction("left");
+          }
+
+          if (keyMoving.getRight() == true) {
+               set_direction("right");
+          }
 
           // Make it always face out of the screen when the button is not pressed
-//          if (keyMoving.getRight() == false && keyMoving.getLeft() == false &&
-//                    keyMoving.getUp() == false
-//                    && keyMoving.getDown() == false) {
-//                    set_direction("down");
-//          }
-//          //CHECK TILE COLLISION
-          boolean collisionOn = false;
+          if (keyMoving.getRight() == false && keyMoving.getLeft() == false &&
+                    keyMoving.getUp() == false
+                    && keyMoving.getDown() == false) {
+               set_direction("stand");
+          }
+          // //CHECK TILE COLLISION
+          // boolean collisionOn = false;
           myPanel.collisionChecker.checkTile(this);
-          //IF COLLISION IS FALSE, PLAYER CAN MOVE
-          if(collisionOn == false){
-               if (keyMoving.getUp() == true) {
-                    set_direction("up");
-                    set_worldY(get_worldY() - get_speed());
-               }
+          // IF COLLISION IS FALSE, PLAYER CAN MOVE
+          if (collisionOn == false) {
 
-               if (keyMoving.getDown() == true) {
-                    set_direction("down");
-                    set_worldY(get_worldY() + get_speed());
+               switch (get_direction()) {
+                    case "up":
+                         set_worldY(get_worldY() - get_speed());
+                         break;
+                    case "down":
+                         set_worldY(get_worldY() + get_speed());
+                         break;
+                    case "left":
+                         set_worldX(get_worldX() - get_speed());
+                         break;
+                    case "right":
+                         set_worldX(get_worldX() + get_speed());
+                         break;
+                    case "stand":
+                         break;
                }
-
-               if (keyMoving.getLeft() == true) {
-                    set_direction("left");
-                    set_worldX(get_worldX() - get_speed());
-               }
-
-               if (keyMoving.getRight() == true) {
-                    set_direction("right");
-                    set_worldX(get_worldX() + get_speed());
-               }
-//               switch (get_direction()){
-//                    case "up":
-//                         set_worldY(get_worldY() - get_speed());
-//                         break;
-//                    case "down":
-//                         set_worldY(get_worldY() + get_speed());
-//                         break;
-//                    case "left":
-//                         set_worldX(get_worldX() - get_speed());
-//                         break;
-//                    case "right":
-//                         set_worldX(get_worldX() + get_speed());
-//                         break;
-//               }
           }
           // Changes the displayed image every 12 frames
           set_spriteCounter(get_spriteCounter() + 1);
@@ -142,6 +141,10 @@ public class Player extends Entity {
                     }
                     break;
 
+               case "stand":
+                    image = get_down1();
+                    break;
+
                default:
                     break;
           }
@@ -166,7 +169,11 @@ public class Player extends Entity {
           }
      }
 
-     public int getScreenX() { return screenX; }
+     public int getScreenX() {
+          return screenX;
+     }
 
-     public int getScreenY() { return screenY; }
+     public int getScreenY() {
+          return screenY;
+     }
 }

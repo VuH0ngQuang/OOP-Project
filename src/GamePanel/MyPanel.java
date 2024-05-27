@@ -15,7 +15,7 @@ public class MyPanel extends JPanel implements Runnable {
      private final int originalTileSize = 16; // 16
 
      private final int maxScreenCol = 81;
-     private final int maxScreenRow =45;
+     private final int maxScreenRow = 45;
 
      private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
      private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
@@ -27,7 +27,12 @@ public class MyPanel extends JPanel implements Runnable {
      Thread gameThread;
      public CollisionChecker collisionChecker = new CollisionChecker(this);
      KeyMoving keyMoving = new KeyMoving();
-     public Player player = new Player(this, keyMoving, originalTileSize * 3 * 3, originalTileSize * 3 *2, 4, 3, 3); // set default starting position at 3:2
+     public Player player = new Player(this, keyMoving, originalTileSize * 3 * 3, originalTileSize * 3 * 2, 4, 3, 3); // set
+                                                                                                                      // default
+                                                                                                                      // starting
+                                                                                                                      // position
+                                                                                                                      // at
+                                                                                                                      // 3:2
 
      // Panel
      public MyPanel() {
@@ -39,7 +44,8 @@ public class MyPanel extends JPanel implements Runnable {
           this.setFocusable(true);
 
      }
-     //WORLD SETTINGS
+
+     // WORLD SETTINGS
      public final int maxWorldCol = 50;
      public final int maxWorldRow = 50;
      public final int maxWorldWidth = originalTileSize * 3 * maxWorldCol;
@@ -77,7 +83,8 @@ public class MyPanel extends JPanel implements Runnable {
                     // refresh information
                     update();
                     // Represents the elements
-                    repaint();
+                    if (player.get_direction() != "stand")
+                         repaint();
                     delta--;
                     drawCount++;
                }
@@ -103,8 +110,8 @@ public class MyPanel extends JPanel implements Runnable {
      public void paintComponent(Graphics g) {
 
           super.paintComponent(g);
-          //draw floor
-          Graphics2D g2 = (Graphics2D)g;
+          // draw floor
+          Graphics2D g2 = (Graphics2D) g;
           titleManager.draw(g2);
           // draw player
           player.draw(g);
@@ -123,11 +130,11 @@ public class MyPanel extends JPanel implements Runnable {
      }
 
      public int getMaxScreenRow() {
-          return maxScreenRow/3;
+          return maxScreenRow / 3;
      }
 
      public int getMaxScreenCol() {
-          return maxScreenCol/3;
+          return maxScreenCol / 3;
      }
 
      public int getOriginalTileSize() {
@@ -137,9 +144,21 @@ public class MyPanel extends JPanel implements Runnable {
      public int get_FPS() {
           return FPS;
      }
-     public int getMaxWorldCol(){ return maxWorldCol; };
-     public int getMaxWorldRow(){ return maxWorldRow; };
-     public int getMaxWorldWidth(){ return maxWorldWidth; };
-     public int getMaxWorldHeight(){ return maxWorldHeight; }
+
+     public int getMaxWorldCol() {
+          return maxWorldCol;
+     };
+
+     public int getMaxWorldRow() {
+          return maxWorldRow;
+     };
+
+     public int getMaxWorldWidth() {
+          return maxWorldWidth;
+     };
+
+     public int getMaxWorldHeight() {
+          return maxWorldHeight;
+     }
 
 }
