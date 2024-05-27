@@ -32,7 +32,6 @@ public class Player extends Entity {
           solidArea.width = 32;
           solidArea.height = 32;
           getPlayerImage();
-          set_direction("down");
      }
 
      // update value
@@ -114,7 +113,6 @@ public class Player extends Entity {
                     break;
 
                case "down":
-                    image = get_down1();
                     if (get_spriteNum() == 1) {
                          image = get_down1();
                     }
