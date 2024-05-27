@@ -29,25 +29,25 @@ public class CollisionChecker {
                 }
                 break;
             case "down":
-                entityBottomRow = (entityTopWorldY - entity.get_speed())/(mp.getOriginalTileSize()*3);
-                tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow ];
+                entityBottomRow = (entityBottomWorldY + entity.get_speed())/(mp.getOriginalTileSize()*3);
+                tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityBottomRow];
+                tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow ];
                 if(mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision){
                     entity.collisionOn = true;
                 }
                 break;
             case "left":
-                entityLeftCol = (entityTopWorldY - entity.get_speed())/(mp.getOriginalTileSize()*3);
+                entityLeftCol = (entityLeftWorldX - entity.get_speed())/(mp.getOriginalTileSize()*3);
                 tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow ];
+                tileNum2 = mp.titleManager.mapTileNum[entityLeftCol][entityBottomRow ];
                 if(mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision){
                     entity.collisionOn = true;
                 }
                 break;
             case "right":
-                entityRightCol = (entityTopWorldY - entity.get_speed())/(mp.getOriginalTileSize()*3);
-                tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow ];
+                entityRightCol = (entityRightWorldX + entity.get_speed())/(mp.getOriginalTileSize()*3);
+                tileNum1 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow];
+                tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow ];
                 if(mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision){
                     entity.collisionOn = true;
                 }

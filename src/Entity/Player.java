@@ -46,7 +46,7 @@ public class Player extends Entity {
 //                    set_direction("down");
 //          }
 //          //CHECK TILE COLLISION
-//          boolean collisionOn = false;
+          boolean collisionOn = false;
           myPanel.collisionChecker.checkTile(this);
           //IF COLLISION IS FALSE, PLAYER CAN MOVE
           if(collisionOn == false){
