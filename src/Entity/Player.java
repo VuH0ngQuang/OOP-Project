@@ -18,9 +18,7 @@ public class Player extends Entity {
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
-          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y,
-                    speed,
-                    myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
+          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y, speed, myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
           // set camera at the center of the screen
