@@ -72,25 +72,19 @@ public class TitleManager {
     public void draw(Graphics2D g2) {
         int worldCol = 0;
         int worldRow = 0;
-        int tileNum;
-        int worldX;
-        int worldY;
-        int screenX;
-        int screenY;
 
         while ((worldCol < mp.getMaxWorldCol() && worldRow < mp.getMaxWorldRow())) {
-            tileNum = mapTileNum[worldCol][worldRow];
-            worldX = worldCol * mp.getOriginalTileSize() * 3;
-            worldY = worldRow * mp.getOriginalTileSize() * 3;
-            screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
-            screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
+            int tileNum = mapTileNum[worldCol][worldRow];
+            int worldX = worldCol * mp.getOriginalTileSize() * 3;
+            int worldY = worldRow * mp.getOriginalTileSize() * 3;
+            int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
+            int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
 
             if (worldX + mp.getOriginalTileSize() * 3 > mp.player.get_worldX() - mp.player.screenX &&
                     worldX - mp.getOriginalTileSize() * 3 < mp.player.get_worldX() + mp.player.screenX &&
                     worldY + mp.getOriginalTileSize() * 3 > mp.player.get_worldY() - mp.player.screenY &&
                     worldY - mp.getOriginalTileSize() * 3 < mp.player.get_worldY() + mp.player.screenY) {
-                g2.drawImage(title[tileNum].image, screenX, screenY, mp.getOriginalTileSize() * 3,
-                        mp.getOriginalTileSize() * 3, null);
+                g2.drawImage(title[tileNum].image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
             }
             worldCol++;
             if (worldCol == mp.getMaxWorldCol()) {

@@ -11,7 +11,7 @@ public class MyFrame extends JFrame {
 
           this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           this.setResizable(false);
-          this.setTitle("?");
+          this.setTitle("NinjaDie");
 
           this.add(myPanel);
           this.pack();
@@ -19,6 +19,7 @@ public class MyFrame extends JFrame {
           this.setLocationRelativeTo(null);
           this.setVisible(true);
 
+          myPanel.setupGame();
           myPanel.startGameThread();
      }
 
