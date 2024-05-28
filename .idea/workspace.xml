@@ -39,7 +39,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/OOP-Project/Resources/Player",
+    "last_opened_file_path": "D:/OOP-Project/Resources/Object",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -50,6 +50,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OOP-Project\Resources\Object" />
       <recent name="D:\OOP-Project\Resources\Player" />
       <recent name="D:\OOP-Project\Resources\Enemy" />
       <recent name="D:\OOP-Project\Resources\Dart" />
