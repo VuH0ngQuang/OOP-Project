@@ -20,7 +20,7 @@ public class Player extends Entity {
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
-          super(myPanel.getOriginalTileSize() * 3 *x, myPanel.getOriginalTileSize() * 3 * y, speed,
+          super(myPanel.getOriginalTileSize() * 3 * x, myPanel.getOriginalTileSize() * 3 * y, speed,
                     myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
@@ -73,7 +73,6 @@ public class Player extends Entity {
                int objIndex = myPanel.collisionChecker.checkObject(this, true);
                pickUpObject(objIndex);
 
-
                // IF COLLISION IS FALSE, PLAYER CAN MOVE
                if (collisionOn == false) {
 
@@ -107,22 +106,33 @@ public class Player extends Entity {
           }
 
      }
-     public void pickUpObject(int i){
-          if(i != 999){
+
+     public void pickUpObject(int i) {
+          if (i != 999) {
                String objectName = myPanel.obj[i].name;
 
-               switch (objectName){
+               switch (objectName) {
                     case "Key":
                          hasKey++;
                          myPanel.obj[i] = null;
-                         System.out.println("Key:"+hasKey);
+                         System.out.println("Key:" + hasKey);
                          break;
 
                     case "Door":
-                         if(hasKey > 0){
+                         if (hasKey > 0) {
                               myPanel.obj[i] = null;
                               hasKey--;
-                         }
+                              System.out.println("Key:" + hasKey);
+                         } else
+                              System.out.println("Key:" + hasKey);
+                         break;
+
+                    case "Chest":
+                         myPanel.obj[i] = null;
+                         break;
+
+                    case "Hear":
+                         myPanel.obj[i] = null;
                          break;
                }
           }
