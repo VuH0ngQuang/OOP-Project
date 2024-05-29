@@ -10,16 +10,13 @@ public class SuperObject {
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0, 0, 48 ,48);
+    public int solidAreaDefaultX = 0;
+    public int solidAreaDefaultY = 0;
 
     public void draw(Graphics2D g2, MyPanel mp){
         int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
         int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
-
-        if (worldX + mp.getOriginalTileSize() * 3 > mp.player.get_worldX() - mp.player.screenX &&
-                worldX - mp.getOriginalTileSize() * 3 < mp.player.get_worldX() + mp.player.screenX &&
-                worldY + mp.getOriginalTileSize() * 3 > mp.player.get_worldY() - mp.player.screenY &&
-                worldY - mp.getOriginalTileSize() * 3 < mp.player.get_worldY() + mp.player.screenY) {
-            g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
-        }
+        g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
     }
 }

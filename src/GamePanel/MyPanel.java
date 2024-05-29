@@ -29,7 +29,7 @@ public class MyPanel extends JPanel implements Runnable {
      Thread gameThread;
      public CollisionChecker collisionChecker = new CollisionChecker(this);
      KeyMoving keyMoving = new KeyMoving();
-     public Player player = new Player(this, keyMoving, 3, 2, 4, 3, 3); // set
+     public Player player = new Player(this, keyMoving, 2, 1, 4, 3, 3); // set
                                                                         // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
      public AssetSetter assetSetter = new AssetSetter(this);
