@@ -16,19 +16,24 @@ public class Player extends Entity {
      public final int screenX;
      public final int screenY;
 
+     int hasKey = 0;
+
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
-          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y, speed, myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
+          super(myPanel.getOriginalTileSize() * 3 *x, myPanel.getOriginalTileSize() * 3 * y, speed,
+                    myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
           // set camera at the center of the screen
           screenX = myPanel.getScreenWidth() / 2 - (myPanel.getOriginalTileSize() * 3 / 2);
           screenY = myPanel.getScreenHeight() / 2 - (myPanel.getOriginalTileSize() * 3 / 2);
           solidArea = new Rectangle();
-          solidArea.x = 8;
-          solidArea.y = 16;
-          solidArea.width = 32;
-          solidArea.height = 32;
+          solidArea.x = 12;
+          solidArea.y = 20;
+          solidAreaDefaultX = solidArea.x;
+          solidAreaDefaultY = solidArea.y;
+          solidArea.width = 24;
+          solidArea.height = 28;
           getPlayerImage();
           set_direction("down");
      }
@@ -63,6 +68,12 @@ public class Player extends Entity {
                // //CHECK TILE COLLISION
                collisionOn = false;
                myPanel.collisionChecker.checkTile(this);
+
+               // check object collision
+               int objIndex = myPanel.collisionChecker.checkObject(this, true);
+               pickUpObject(objIndex);
+
+
                // IF COLLISION IS FALSE, PLAYER CAN MOVE
                if (collisionOn == false) {
 
@@ -96,9 +107,29 @@ public class Player extends Entity {
           }
 
      }
+     public void pickUpObject(int i){
+          if(i != 999){
+               String objectName = myPanel.obj[i].name;
+
+               switch (objectName){
+                    case "Key":
+                         hasKey++;
+                         myPanel.obj[i] = null;
+                         System.out.println("Key:"+hasKey);
+                         break;
+
+                    case "Door":
+                         if(hasKey > 0){
+                              myPanel.obj[i] = null;
+                              hasKey--;
+                         }
+                         break;
+               }
+          }
+     }
 
      // draw graphics
-     public void draw(Graphics g) {
+     public void draw(Graphics2D g2) {
           // g.setColor(Color.white);
           // g.fillRect(get_worldX(), get_worldY(), get_width(), get_height());
 
@@ -149,7 +180,7 @@ public class Player extends Entity {
                     break;
           }
 
-          g.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
+          g2.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
      }
 
      // image input
