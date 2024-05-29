@@ -18,7 +18,8 @@ public class Player extends Entity {
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
-          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y, speed, myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
+          super(myPanel.getOriginalTileSize() * x, myPanel.getOriginalTileSize() * y, speed,
+                    myPanel.getOriginalTileSize() * height, myPanel.getOriginalTileSize() * width);
           this.myPanel = myPanel;
           this.keyMoving = keyMoving;
           // set camera at the center of the screen
@@ -98,7 +99,7 @@ public class Player extends Entity {
      }
 
      // draw graphics
-     public void draw(Graphics g) {
+     public void draw(Graphics2D g2) {
           // g.setColor(Color.white);
           // g.fillRect(get_worldX(), get_worldY(), get_width(), get_height());
 
@@ -149,7 +150,7 @@ public class Player extends Entity {
                     break;
           }
 
-          g.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
+          g2.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
      }
 
      // image input

@@ -29,10 +29,11 @@ public class MyPanel extends JPanel implements Runnable {
      Thread gameThread;
      public CollisionChecker collisionChecker = new CollisionChecker(this);
      KeyMoving keyMoving = new KeyMoving();
-     public Player player = new Player(this, keyMoving, 3,  2, 4, 3, 3); // set
-                                                                                                                      // default starting position at 3:2
+     public Player player = new Player(this, keyMoving, 3, 2, 4, 3, 3); // set
+                                                                        // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
      public AssetSetter assetSetter = new AssetSetter(this);
+
      // Panel
      public MyPanel() {
 
@@ -44,7 +45,7 @@ public class MyPanel extends JPanel implements Runnable {
 
      }
 
-     public void setupGame(){
+     public void setupGame() {
           assetSetter.setObject();
      }
 
@@ -116,15 +117,15 @@ public class MyPanel extends JPanel implements Runnable {
           Graphics2D g2 = (Graphics2D) g;
           titleManager.draw(g2);
           // dRaW oBjEcT
-          for(int i = 0; i < obj.length; i++){
-               if(obj[i] != null){
+          for (int i = 0; i < obj.length; i++) {
+               if (obj[i] != null) {
                     obj[i].draw(g2, this);
                }
           }
           // draw player
-          player.draw(g);
+          player.draw(g2);
 
-          g.dispose();
+          g2.dispose();
 
      }
 
