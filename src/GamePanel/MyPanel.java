@@ -12,27 +12,36 @@ import java.awt.*;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel implements Runnable {
-
      // specifications
      private final int originalTileSize = 16; // 16
 
      private final int maxScreenCol = 81;
      private final int maxScreenRow = 45;
 
+     public final int tileSize = getOriginalTileSize() * 3;
+
      private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
      private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
 
      private final int FPS = 60;
 
+
      // create object
      public TitleManager titleManager = new TitleManager(this);
      Thread gameThread;
      public CollisionChecker collisionChecker = new CollisionChecker(this);
-     KeyMoving keyMoving = new KeyMoving();
-     public Player player = new Player(this, keyMoving, 2, 1, 4, 3, 3); // set
+     KeyMoving keyMoving;
+     public Player player;  // move value to MyPanel() below
                                                                         // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
      public AssetSetter assetSetter = new AssetSetter(this);
+     public UI ui = new UI(this);
+
+
+     //GAME STATE
+     public int gameState;
+     public final int titleState = 0;
+     public final int playState = 1;
 
      // Panel
      public MyPanel() {
@@ -42,11 +51,14 @@ public class MyPanel extends JPanel implements Runnable {
           this.setDoubleBuffered(true);
           this.addKeyListener(keyMoving);
           this.setFocusable(true);
-
+          this.keyMoving = new KeyMoving(this);
+          this.player = new Player(this, keyMoving, 2, 1, 4, 3, 3);
+          this.addKeyListener(keyMoving);
      }
 
      public void setupGame() {
           assetSetter.setObject();
+          gameState = titleState;
      }
 
      // WORLD SETTINGS
@@ -115,19 +127,29 @@ public class MyPanel extends JPanel implements Runnable {
           super.paintComponent(g);
           // draw floor
           Graphics2D g2 = (Graphics2D) g;
-          titleManager.draw(g2);
-          // dRaW oBjEcT
-          for (int i = 0; i < obj.length; i++) {
-               if (obj[i] != null) {
-                    obj[i].draw(g2, this);
-               }
+          //TITLE SCREEN
+          if(gameState == titleState) {
+          ui.draw(g2);
           }
-          // draw player
-          player.draw(g2);
+          else{
+               titleManager.draw(g2);
+               // dRaW oBjEcT
+               for (int i = 0; i < obj.length; i++) {
+                    if (obj[i] != null) {
+                         obj[i].draw(g2, this);
+                    }
+               }
+               // draw player
+               player.draw(g2);
 
-          g2.dispose();
+               g2.dispose();
+               //UI
+               ui.draw(g2);
+          }
+
 
      }
+
 
      // get and set function
      public int getScreenWidth() {
@@ -169,5 +191,6 @@ public class MyPanel extends JPanel implements Runnable {
      public int getMaxWorldHeight() {
           return maxWorldHeight;
      }
+
 
 }

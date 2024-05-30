@@ -16,7 +16,7 @@ public class Player extends Entity {
      public final int screenX;
      public final int screenY;
 
-     int hasKey = 0;
+     public int hasKey = 0;
 
      // contructol
      public Player(MyPanel myPanel, KeyMoving keyMoving, int x, int y, int speed, int height, int width) {
