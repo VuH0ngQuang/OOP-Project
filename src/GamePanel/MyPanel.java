@@ -6,6 +6,7 @@ import KeyControl.*;
 import Entity.*;
 import Title.TitleManager;
 import Object.*;
+import Sound.*;
 
 import java.awt.*;
 
@@ -25,20 +26,21 @@ public class MyPanel extends JPanel implements Runnable {
 
      private final int FPS = 60;
 
-
      // create object
      public TitleManager titleManager = new TitleManager(this);
      Thread gameThread;
      public CollisionChecker collisionChecker = new CollisionChecker(this);
      KeyMoving keyMoving;
-     public Player player;  // move value to MyPanel() below
-                                                                        // default starting position at 3:2
+     public Player player; // move value to MyPanel() below
+                           // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
      public AssetSetter assetSetter = new AssetSetter(this);
      public UI ui = new UI(this);
 
+     // Sound
+     Sound sound = new Sound();
 
-     //GAME STATE
+     // GAME STATE
      public int gameState;
      public final int titleState = 0;
      public final int playState = 1;
@@ -116,7 +118,7 @@ public class MyPanel extends JPanel implements Runnable {
 
      // update before paint
      public void update() {
-          if (gameState == playState){
+          if (gameState == playState) {
                player.update();
           }
      }
@@ -127,11 +129,10 @@ public class MyPanel extends JPanel implements Runnable {
           super.paintComponent(g);
           // draw floor
           Graphics2D g2 = (Graphics2D) g;
-          //TITLE SCREEN
-          if(gameState == titleState) {
-          ui.draw(g2);
-          }
-          else{
+          // TITLE SCREEN
+          if (gameState == titleState) {
+               ui.draw(g2);
+          } else {
                titleManager.draw(g2);
                // dRaW oBjEcT
                for (int i = 0; i < obj.length; i++) {
@@ -141,14 +142,30 @@ public class MyPanel extends JPanel implements Runnable {
                }
                // draw player
                player.draw(g2);
-               //UI
+               // UI
                ui.draw(g2);
                g2.dispose();
           }
 
+     }
+
+     // function sound
+     public void playMusic(int i) {
+
+          sound.setFile(i);
+          sound.play();
+          sound.loop();
 
      }
 
+     public void stopMusic() {
+          sound.stop();
+     }
+
+     public void playSE(int i) {
+          sound.setFile(i);
+          sound.play();
+     }
 
      // get and set function
      public int getScreenWidth() {
@@ -190,6 +207,5 @@ public class MyPanel extends JPanel implements Runnable {
      public int getMaxWorldHeight() {
           return maxWorldHeight;
      }
-
 
 }
