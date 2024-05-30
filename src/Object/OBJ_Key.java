@@ -1,5 +1,7 @@
 package Object;
 
+import GamePanel.MyPanel;
+
 import javax.imageio.ImageIO;
 import java.io.IOException;
 

@@ -27,7 +27,7 @@ public class AssetSetter {
         mp.obj[2].worldY = (int) (5 * mp.getOriginalTileSize() * 3);
 
         // position of the heart
-        mp.obj[3] = new OBJ_Hear();
+        mp.obj[3] = new OBJ_Healing();
         mp.obj[3].worldX = (int) (43 * mp.getOriginalTileSize() * 3);
         mp.obj[3].worldY = (int) (5 * mp.getOriginalTileSize() * 3);
     }

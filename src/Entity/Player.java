@@ -36,6 +36,9 @@ public class Player extends Entity {
           solidArea.height = 28;
           getPlayerImage();
           set_direction("down");
+          //PLAYER STATUS
+          maxLife = 6;
+          life = maxLife;
      }
 
      // update value

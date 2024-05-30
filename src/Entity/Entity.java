@@ -18,6 +18,9 @@ public class Entity {
           this.width = width;
           this.height = height;
      }
+     //CHARACTER STATUS
+     public int maxLife;
+     public int life;
 
      // set and get
      public void set_worldX(int x) { this.worldX = x; }
