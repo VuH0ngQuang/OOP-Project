@@ -11,7 +11,7 @@ public class Entity {
      public int solidAreaDefaultX, solidAreaDefaultY;
      public boolean collisionOn = false;
 
-     Entity(int x, int y, int speed, int height, int width) {
+     public Entity(int x, int y, int speed, int height, int width) {
           this.worldX = x;
           this.worldY = y;
           this.speed = speed;

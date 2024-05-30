@@ -116,9 +116,9 @@ public class MyPanel extends JPanel implements Runnable {
 
      // update before paint
      public void update() {
-
-          player.update();
-
+          if (gameState == playState){
+               player.update();
+          }
      }
 
      // graphics paint
@@ -141,10 +141,9 @@ public class MyPanel extends JPanel implements Runnable {
                }
                // draw player
                player.draw(g2);
-
-               g2.dispose();
                //UI
                ui.draw(g2);
+               g2.dispose();
           }
 
 

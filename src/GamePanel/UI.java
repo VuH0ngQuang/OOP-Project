@@ -37,6 +37,10 @@ public class UI{
         heart_empty = heart.image;
         heart_half = heart.image2;
         heart_full = heart.image3;
+        // Check if the images are loaded correctly
+        System.out.println("heart_empty: " + heart_empty);
+        System.out.println("heart_half: " + heart_half);
+        System.out.println("heart_full: " + heart_full);
     }
     public void draw(Graphics2D g2){
         this.g2 = g2;
@@ -53,8 +57,15 @@ public class UI{
         }
     }
     public void drawPlayerLife(){
-        int x = gp.tileSize/2;
-        int y = gp.tileSize/2;
+//        Graphics2D g2d = (Graphics2D) gp.getGraphics();
+//        // Check if this method is being called
+//        System.out.println("drawPlayerLife is being called");
+//        // Test if g2 can draw anything
+//        g2d.setColor(Color.RED);
+//        g2d.fillRect(144, 48, 50, 50);
+//        g2d.dispose();
+        int x = gp.tileSize;
+        int y = gp.tileSize;
         int i = 0;
         //DRAW MAX HEART
         while (i < gp.player.maxLife/2){
@@ -63,8 +74,8 @@ public class UI{
             x += gp.tileSize;
         }
         //RESET
-        x = gp.tileSize/2;
-        y = gp.tileSize/2;
+        x = gp.tileSize;
+        y = gp.tileSize;
         i = 0;
         //DRAW CURRENT LIFE
         while (i < gp.player.life){
@@ -75,7 +86,13 @@ public class UI{
             }
             i++;
             x += gp.tileSize;
-
+//            // Check the values of gp.player.life and gp.player.maxLife
+//            System.out.println("gp.player.life: " + gp.player.life);
+//            System.out.println("gp.player.maxLife: " + gp.player.maxLife);
+//            // Check the values of gp.tileSize, x, and y
+//            System.out.println("gp.tileSize: " + gp.tileSize);
+//            System.out.println("x: " + x);
+//            System.out.println("y: " + y);
         }
     }
     public void drawTitleScreen(){
