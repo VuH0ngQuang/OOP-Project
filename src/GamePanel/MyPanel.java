@@ -34,6 +34,7 @@ public class MyPanel extends JPanel implements Runnable {
      public Player player; // move value to MyPanel() below
                            // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
+     public Entity enemy[] = new Entity[10];
      public AssetSetter assetSetter = new AssetSetter(this);
      public UI ui = new UI(this);
 
@@ -61,6 +62,7 @@ public class MyPanel extends JPanel implements Runnable {
      public void setupGame() {
           assetSetter.setObject();
           gameState = titleState;
+          assetSetter.setEnemy();
      }
 
      // WORLD SETTINGS
@@ -119,7 +121,14 @@ public class MyPanel extends JPanel implements Runnable {
      // update before paint
      public void update() {
           if (gameState == playState) {
+               //PLAYER
                player.update();
+               //ENEMY
+               for (int i = 0; i < enemy.length; i++) {
+                    if (enemy[i] != null) {
+                         enemy[i].update();
+                    }
+               }
           }
      }
 

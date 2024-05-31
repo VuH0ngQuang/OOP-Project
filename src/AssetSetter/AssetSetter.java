@@ -1,5 +1,6 @@
 package AssetSetter;
 
+import Entity.ENinja;
 import Object.*;
 import GamePanel.MyPanel;
 
@@ -30,5 +31,11 @@ public class AssetSetter {
         mp.obj[3] = new OBJ_Healing();
         mp.obj[3].worldX = (int) (43 * mp.getOriginalTileSize() * 3);
         mp.obj[3].worldY = (int) (5 * mp.getOriginalTileSize() * 3);
+    }
+    public void setEnemy() {
+        // position of the enemy
+        mp.enemy[0] = new ENinja(mp);
+        mp.enemy[0].set_worldX((int) (44 * mp.getOriginalTileSize() * 3));
+        mp.enemy[0].set_worldY((int) (7 * mp.getOriginalTileSize() * 3));
     }
 }

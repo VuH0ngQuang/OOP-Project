@@ -1,5 +1,7 @@
 package Entity;
 
+import GamePanel.MyPanel;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -8,9 +10,8 @@ public class Entity {
      private BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
      private String direction;
      public Rectangle solidArea;
-     public int solidAreaDefaultX, solidAreaDefaultY;
+     public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
-
      public Entity(int x, int y, int speed, int height, int width) {
           this.worldX = x;
           this.worldY = y;
@@ -18,6 +19,46 @@ public class Entity {
           this.width = width;
           this.height = height;
      }
+     public void setAction(){};
+     public void update(){
+          setAction();
+          collisionOn = false;
+          mp.collisionChecker.checkTile(this);
+               // IF COLLISION IS FALSE, ENEMY CAN MOVE
+          if (collisionOn == false) {
+               switch (get_direction()) {
+                    case "up":
+                         set_worldY(get_worldY() - get_speed());
+                         break;
+                    case "down":
+                         set_worldY(get_worldY() + get_speed());
+                         break;
+                    case "left":
+                         set_worldX(get_worldX() - get_speed());
+                         break;
+                    case "right":
+                         set_worldX(get_worldX() + get_speed());
+                         break;
+                    // case "stand":
+                    // break;
+               }
+          }
+          // Changes the displayed image every 12 frames
+          set_spriteCounter(get_spriteCounter() + 1);
+          if (get_spriteCounter() > 12) {
+               if (get_spriteNum() == 1) {
+                    set_spriteNum(2);
+               } else if (get_spriteNum() == 2) {
+                    set_spriteNum(1);
+               }
+               set_spriteCounter(0);
+          }
+     }
+     MyPanel mp;
+     public Entity(MyPanel mp){
+          this.mp = mp;
+     }
+     public String name;
      //CHARACTER STATUS
      public int maxLife;
      public int life;
