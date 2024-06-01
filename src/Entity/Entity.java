@@ -39,28 +39,27 @@ public class Entity {
      public void update(){
           setAction();
           collisionOn = false;
-          if (get_direction() == null) {
-               // Handle the case where direction is null
-               System.out.println("Direction is null");
-          }
-          mp.collisionChecker.checkTile(this);
+          if (get_direction() != null) {
+               mp.collisionChecker.checkTile(this);
                // IF COLLISION IS FALSE, ENEMY CAN MOVE
-          if (collisionOn == false) {
-               switch (get_direction()) {
-                    case "up":
-                         set_worldY(get_worldY() - get_speed());
-                         break;
-                    case "down":
-                         set_worldY(get_worldY() + get_speed());
-                         break;
-                    case "left":
-                         set_worldX(get_worldX() - get_speed());
-                         break;
-                    case "right":
-                         set_worldX(get_worldX() + get_speed());
-                         break;
-                    // case "stand":
-                    // break;
+               System.out.println(collisionOn);
+               if (collisionOn == false) {
+                    switch (get_direction()) {
+                         case "up":
+                              set_worldY(get_worldY() - get_speed());
+                              break;
+                         case "down":
+                              set_worldY(get_worldY() + get_speed());
+                              break;
+                         case "left":
+                              set_worldX(get_worldX() - get_speed());
+                              break;
+                         case "right":
+                              set_worldX(get_worldX() + get_speed());
+                              break;
+                         // case "stand":
+                         // break;
+                    }
                }
           }
           // Changes the displayed image every 12 frames
