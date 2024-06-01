@@ -9,7 +9,7 @@ import Object.*;
 public class UI {
     MyPanel gp;
     Graphics2D g2;
-    Font maruMonica, purisaB;
+    Font maruMonica, purisaB, arial_24;
     BufferedImage heart_full, heart_half, heart_empty;
     public boolean messageOn = false;
     public String message = "";
@@ -17,6 +17,7 @@ public class UI {
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
+    public OBJ_Key Obj_key;
 
     public UI(MyPanel gp) {
         this.gp = gp;
@@ -24,8 +25,10 @@ public class UI {
         try {
             InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
-            is = getClass().getResourceAsStream("/font/Purisa Bold.ttf");
+            is = getClass().getResourceAsStream("/font/Purisa_Bold.ttf");
             purisaB = Font.createFont(Font.TRUETYPE_FONT, is);
+
+            arial_24 = new Font("Arial", Font.PLAIN, gp.tileSize / 2);
         } catch (FontFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -36,6 +39,9 @@ public class UI {
         heart_empty = heart.image;
         heart_half = heart.image2;
         heart_full = heart.image3;
+
+        // CREATE key OBJECT
+        Obj_key = new OBJ_Key();
         // Check if the images are loaded correctly
         // System.out.println("heart_empty: " + heart_empty);
         // System.out.println("heart_half: " + heart_half);
@@ -54,6 +60,7 @@ public class UI {
         // PLAY STATE
         if (gp.gameState == gp.playState) {
             drawPlayerLife();
+            drawPlayerKey();
         }
     }
 
@@ -146,5 +153,12 @@ public class UI {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.getScreenWidth() / 2 - length / 2;
         return x;
+    }
+
+    public void drawPlayerKey() {
+        g2.setFont(arial_24);
+        g2.setColor(Color.white);
+        g2.drawString(" x " + gp.player.hasKey, gp.tileSize, gp.tileSize * 2 - 10);
+        g2.drawImage(Obj_key.image, 0, gp.tileSize + 10, gp.tileSize, gp.tileSize, null);
     }
 }

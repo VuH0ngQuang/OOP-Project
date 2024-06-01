@@ -36,7 +36,7 @@ public class Player extends Entity {
           solidArea.height = 28;
           getPlayerImage();
           set_direction("down");
-          //PLAYER STATUS
+          // PLAYER STATUS
           maxLife = 6;
           life = maxLife;
      }
@@ -118,16 +118,13 @@ public class Player extends Entity {
                     case "Key":
                          hasKey++;
                          myPanel.obj[i] = null;
-                         System.out.println("Key:" + hasKey);
                          break;
 
                     case "Door":
                          if (hasKey > 0) {
                               myPanel.obj[i] = null;
                               hasKey--;
-                              System.out.println("Key:" + hasKey);
-                         } else
-                              System.out.println("Key:" + hasKey);
+                         }
                          break;
 
                     case "Chest":

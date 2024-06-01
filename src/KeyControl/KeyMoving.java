@@ -45,7 +45,7 @@ public class KeyMoving implements KeyListener {
                          gp.gameState = gp.playState;
 
                          // begin play music
-                         gp.playMusic(0);
+                         // gp.playMusic(0);
                     }
                     if (gp.ui.commandNum == 1) {
                          System.exit(0);
