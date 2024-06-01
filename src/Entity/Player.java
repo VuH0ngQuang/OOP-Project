@@ -118,21 +118,25 @@ public class Player extends Entity {
                     case "Key":
                          hasKey++;
                          myPanel.obj[i] = null;
+                         myPanel.ui.showMessage("a Key");
                          break;
 
                     case "Door":
                          if (hasKey > 0) {
                               myPanel.obj[i] = null;
                               hasKey--;
-                         }
+                              myPanel.ui.showMessage("open door");
+                         } else
+                              myPanel.ui.showMessage("need a Key");
                          break;
 
                     case "Chest":
-                         myPanel.obj[i] = null;
+                         myPanel.ui.gameFinished = true;
                          break;
 
                     case "Hear":
                          myPanel.obj[i] = null;
+                         myPanel.ui.showMessage("Healing");
                          break;
                }
           }
