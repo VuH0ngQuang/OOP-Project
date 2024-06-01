@@ -1,9 +1,13 @@
 package Entity;
 
 import GamePanel.MyPanel;
+import UtilityTool.UtilityTool;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 public class Entity {
      private int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
@@ -12,6 +16,18 @@ public class Entity {
      public Rectangle solidArea;
      public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
+     public BufferedImage setup (String pathImage) {
+          UtilityTool utilityTool = new UtilityTool();
+          BufferedImage image = null;
+          try {
+//               System.out.println(pathImage);
+               image = ImageIO.read(getClass().getResourceAsStream(pathImage));
+               image = utilityTool.scaleImage(image, 48, 48);
+          } catch (IOException e) {
+               e.printStackTrace();
+          }
+          return image;
+     }
      public Entity(int x, int y, int speed, int height, int width) {
           this.worldX = x;
           this.worldY = y;
@@ -23,6 +39,10 @@ public class Entity {
      public void update(){
           setAction();
           collisionOn = false;
+          if (get_direction() == null) {
+               // Handle the case where direction is null
+               System.out.println("Direction is null");
+          }
           mp.collisionChecker.checkTile(this);
                // IF COLLISION IS FALSE, ENEMY CAN MOVE
           if (collisionOn == false) {

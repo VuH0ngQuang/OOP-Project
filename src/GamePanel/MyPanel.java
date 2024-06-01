@@ -34,7 +34,7 @@ public class MyPanel extends JPanel implements Runnable {
      public Player player; // move value to MyPanel() below
                            // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
-     public Entity enemy[] = new Entity[10];
+     public Entity[] enemy = new Entity[10];
      public AssetSetter assetSetter = new AssetSetter(this);
      public UI ui = new UI(this);
 

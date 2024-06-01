@@ -2,9 +2,9 @@ package Entity;
 
 import GamePanel.MyPanel;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
-import java.io.IOException;
+
 import java.util.Random;
 
 public class ENinja extends Entity{
@@ -25,23 +25,22 @@ public ENinja(MyPanel mp) {
         getImage();
     }
     public void getImage(){
-        try {
-            set_up1(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_up_1.png")));
-            set_up2(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_up_2.png")));
-            set_down1(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_down_1.png")));
-            set_down2(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_down_2.png")));
-            set_left1(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_left_1.png")));
-            set_left2(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_left_2.png")));
-            set_right1(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_right_1.png")));
-            set_right2(ImageIO.read(getClass().getResourceAsStream("/Enemy/ninja2_right_2.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        set_up1(setup("/Enemy/ninja2_up_1.png"));
+        set_up2(setup("/Enemy/ninja2_up_2.png"));
+        set_down1(setup("/Enemy/ninja2_down_1.png"));
+        set_down2(setup("/Enemy/ninja2_down_2.png"));
+        set_left1(setup("/Enemy/ninja2_left_1.png"));
+        set_left2(setup("/Enemy/ninja2_left_2.png"));
+        set_right1(setup("/Enemy/ninja2_right_1.png"));
+        set_right2(setup("/Enemy/ninja2_right_2.png"));
     }
     @Override
     public void setAction(){
+        System.out.println("setAction called"); // Debug print statement
         actionLockCounter++;
+        System.out.println(actionLockCounter);
         if(actionLockCounter == 120){
+            System.out.println("actionLockCounter: " + actionLockCounter); // Debug print statement
             Random random = new Random();
             int i = random.nextInt(100)+1;
             if(i <= 25){
@@ -53,6 +52,7 @@ public ENinja(MyPanel mp) {
             } else {
                 set_direction("right");
             }
+            System.out.println("Direction set to: " + get_direction()); // Debug print statement
             actionLockCounter = 0;
         }
     }
