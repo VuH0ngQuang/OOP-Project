@@ -16,6 +16,8 @@ public class Entity {
      public Rectangle solidArea;
      public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
+     public boolean invincible = false;
+     public int invincibleCounter = 0;
      public BufferedImage setup (String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
           BufferedImage image = null;
@@ -35,10 +37,66 @@ public class Entity {
           this.width = width;
           this.height = height;
      }
+     public void draw(Graphics2D g2){
+          BufferedImage image = null;
+          int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
+          int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
+          if (worldX > mp.player.get_worldX() - mp.player.screenX &&
+                  worldX < mp.player.get_worldX() + mp.player.screenX &&
+                  worldY > mp.player.get_worldY() - mp.player.screenY &&
+                  worldY < mp.player.get_worldY() + mp.player.screenY){
+               switch (get_direction()) {
+                    case "up":
+                         if (get_spriteNum() == 1) {
+                              image = get_up1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_up2();
+                         }
+                         break;
+
+                    case "down":
+                         if (get_spriteNum() == 1) {
+                              image = get_down1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_down2();
+                         }
+                         break;
+
+                    case "left":
+                         if (get_spriteNum() == 1) {
+                              image = get_left1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_left2();
+                         }
+                         break;
+
+                    case "right":
+                         if (get_spriteNum() == 1) {
+                              image = get_right1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_right2();
+                         }
+                         break;
+
+                    // case "stand":
+                    // image = get_down1();
+                    // break;
+
+                    default:
+                         break;
+               }
+               g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
+          }
+     }
      public void setAction(){};
      public void update(){
           setAction();
           collisionOn = false;
+          mp.collisionChecker.checkEntity(this, mp.enemy);
           if (get_direction() != null) {
                mp.collisionChecker.checkTile(this);
                // IF COLLISION IS FALSE, ENEMY CAN MOVE

@@ -24,7 +24,7 @@ public class MyPanel extends JPanel implements Runnable {
      private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
      private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
 
-     private final int FPS = 60;
+     private final int FPS = 120;
 
      // create object
      public TitleManager titleManager = new TitleManager(this);
@@ -147,6 +147,12 @@ public class MyPanel extends JPanel implements Runnable {
                for (int i = 0; i < obj.length; i++) {
                     if (obj[i] != null) {
                          obj[i].draw(g2, this);
+                    }
+               }
+               // draw ENinja
+               for (Entity e : enemy) {
+                    if (e != null) {
+                         e.draw(g2);
                     }
                }
                // draw player

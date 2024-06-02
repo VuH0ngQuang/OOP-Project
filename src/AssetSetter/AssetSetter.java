@@ -36,6 +36,6 @@ public class AssetSetter {
         // position of the enemy
         mp.enemy[0] = new ENinja(mp);
         mp.enemy[0].set_worldX((int) (44 * mp.getOriginalTileSize() * 3));
-        mp.enemy[0].set_worldY((int) (7 * mp.getOriginalTileSize() * 3));
+        mp.enemy[0].set_worldY((int) (6 * mp.getOriginalTileSize() * 3));
     }
 }

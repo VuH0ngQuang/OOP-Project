@@ -72,6 +72,10 @@ public class Player extends Entity {
                collisionOn = false;
                myPanel.collisionChecker.checkTile(this);
 
+               //CHECK ENEMY COLLISION
+               int enemyIndex = myPanel.collisionChecker.checkEntity(this, myPanel.enemy);
+               contactEnemy(enemyIndex);
+
                // check object collision
                int objIndex = myPanel.collisionChecker.checkObject(this, true);
                pickUpObject(objIndex);
@@ -107,7 +111,14 @@ public class Player extends Entity {
                     set_spriteCounter(0);
                }
           }
-
+          // this shit needs to be outside of key if statement !
+          if (invincible == true ){
+               if(invincibleCounter > 60){
+                    invincible = false;
+                    invincibleCounter = 0;
+                    System.out.println("InvincibleCounter: "+invincibleCounter);
+               }
+          }
      }
 
      public void pickUpObject(int i) {
@@ -138,6 +149,16 @@ public class Player extends Entity {
                          myPanel.obj[i] = null;
                          break;
                }
+          }
+     }
+
+     public void contactEnemy(int i){
+          if( i != 999){
+               if (invincible == false) {
+                    life -= 1;
+                    invincible = true;
+               }
+
           }
      }
 
