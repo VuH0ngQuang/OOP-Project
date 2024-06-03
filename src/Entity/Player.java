@@ -113,10 +113,10 @@ public class Player extends Entity {
           }
           // this shit needs to be outside of key if statement !
           if (invincible == true ){
+               invincibleCounter++;
                if(invincibleCounter > 60){
                     invincible = false;
                     invincibleCounter = 0;
-                    System.out.println("InvincibleCounter: "+invincibleCounter);
                }
           }
      }
@@ -213,8 +213,12 @@ public class Player extends Entity {
                default:
                     break;
           }
-
+          if (invincible == true) {
+               g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+          }
           g2.drawImage(image, screenX, screenY, get_width(), get_height(), myPanel);
+          //reset alpha
+          g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
      }
 
      // image input

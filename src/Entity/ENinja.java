@@ -10,6 +10,7 @@ import java.util.Random;
 public class ENinja extends Entity{
 public ENinja(MyPanel mp) {
         super(mp);
+        type = 1;
         name = "ENinja";
         set_speed(1);
         maxLife = 4;
@@ -36,11 +37,11 @@ public ENinja(MyPanel mp) {
     }
     @Override
     public void setAction(){
-        System.out.println("setAction called"); // Debug print statement
+//        System.out.println("setAction called"); // Debug print statement
         actionLockCounter++;
-        System.out.println(actionLockCounter);
+//        System.out.println(actionLockCounter);
         if(actionLockCounter == 120){
-            System.out.println("actionLockCounter: " + actionLockCounter); // Debug print statement
+//            System.out.println("actionLockCounter: " + actionLockCounter); // Debug print statement
             Random random = new Random();
             int i = random.nextInt(100)+1;
             if(i <= 25){
@@ -52,7 +53,7 @@ public ENinja(MyPanel mp) {
             } else {
                 set_direction("right");
             }
-            System.out.println("Direction set to: " + get_direction()); // Debug print statement
+//            System.out.println("Direction set to: " + get_direction()); // Debug print statement
             actionLockCounter = 0;
         }
     }

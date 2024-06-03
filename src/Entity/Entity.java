@@ -18,6 +18,7 @@ public class Entity {
      public boolean collisionOn = false;
      public boolean invincible = false;
      public int invincibleCounter = 0;
+     public int type; // 0 = player 1 = enemy
      public BufferedImage setup (String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
           BufferedImage image = null;
@@ -97,10 +98,17 @@ public class Entity {
           setAction();
           collisionOn = false;
           mp.collisionChecker.checkEntity(this, mp.enemy);
+          boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
+          if (this.type == 1 && contactPlayer){
+               if (mp.player.invincible == false){
+                    mp.player.life--;
+                    mp.player.invincible = true;
+               }
+          }
           if (get_direction() != null) {
                mp.collisionChecker.checkTile(this);
                // IF COLLISION IS FALSE, ENEMY CAN MOVE
-               System.out.println(collisionOn);
+//               System.out.println(collisionOn);
                if (collisionOn == false) {
                     switch (get_direction()) {
                          case "up":

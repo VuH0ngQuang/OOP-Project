@@ -156,4 +156,41 @@ public class CollisionChecker {
         }
         return index;
     }
+    public boolean checkPlayer(Entity entity){
+        boolean contactPlayer = false;
+        //get entity's solid area position
+        entity.solidArea.x = entity.get_worldX() + entity.solidArea.x;
+        entity.solidArea.y = entity.get_worldY() + entity.solidArea.y;
+
+        //get the object's solid area position
+        mp.player.solidArea.x = mp.player.get_worldX() + mp.player.solidArea.x;
+        mp.player.solidArea.y = mp.player.get_worldY() + mp.player.solidArea.y;
+
+        if (entity.get_direction() != null){
+            switch (entity.get_direction()){
+                case "up":
+                    entity.solidArea.y -= entity.get_speed();
+                    break;
+                case "down":
+                    entity.solidArea.y += entity.get_speed();
+                    break;
+                case "left":
+                    entity.solidArea.x -= entity.get_speed();
+                    break;
+                case "right":
+                    entity.solidArea.x += entity.get_speed();
+                    break;
+            }
+        }
+        if(entity.solidArea.intersects(mp.player.solidArea)){
+            entity.collisionOn = true;
+            contactPlayer = true;
+        }
+        entity.solidArea.x = entity.solidAreaDefaultX;
+        entity.solidArea.y = entity.solidAreaDefaultY;
+        mp.player.solidArea.x = mp.player.solidAreaDefaultX;
+        mp.player.solidArea.y = mp.player.solidAreaDefaultY;
+
+        return  contactPlayer;
+    }
 }
