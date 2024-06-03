@@ -142,7 +142,7 @@ public class UI {
             x += gp.tileSize + 10;
         }
 
-        // RESET
+        // RESET 1
         x = 10;
         y = 10;
         i = 0;
