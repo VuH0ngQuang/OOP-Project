@@ -224,7 +224,7 @@ public class Player extends Entity {
                     myPanel.enemy[i].life -= 1;
                     myPanel.enemy[i].invincible = true;
                     if (myPanel.enemy[i].life <= 0) {
-                         mp.enemy[i].dying = true;
+                         myPanel.enemy[i].dying = true;
                     }
                }
           }
