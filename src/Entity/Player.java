@@ -34,6 +34,8 @@ public class Player extends Entity {
           solidAreaDefaultY = solidArea.y;
           solidArea.width = 24;
           solidArea.height = 28;
+          attackArea.width = 36;
+          attackArea.height = 36;
           getPlayerImage();
           getPlayerAttackImage();
           set_direction("down");
@@ -135,6 +137,29 @@ public class Player extends Entity {
           }
           if (spriteCounter > 5 && spriteCounter <= 25) {
                spriteNum = 2;
+               //Save the current worldX, Y, solidArea
+               int currentWorldX = worldX;
+               int currentWorldY = worldY;
+               int solidAreaWidth = solidArea.width;
+               int solidAreaHeight = solidArea.height;
+
+               //Adjust player worldX,Y for attackArea
+               switch(get_direction()){
+                    case "up": worldY -= attackArea.height; break;
+                    case "down": worldY += attackArea.height;break;
+                    case "left": worldX -= attackArea.width; break;
+                    case "right": worldX += attackArea.width; break;
+               }
+               solidArea.width = attackArea.width;
+               solidArea.height = attackArea.height;
+
+               int monsterIndex = myPanel.collisionChecker.checkObject(this, myPanel.monster);
+               damageMonster(monsterIndex);
+
+               worldX = currentWorldX;
+               worldY = currentWorldY;
+               solidArea.width = solidAreaWidth;
+               solidArea.height = solidAreaHeight;
           }
           if (spriteCounter > 25) {
                spriteNum = 1;
@@ -182,6 +207,17 @@ public class Player extends Entity {
                     invincible = true;
                }
 
+          }
+     }
+     public void damageMonster(int i){
+          if(i != 999 ) {
+               if (myPanel.monster[i].invincible == false) {
+                    myPanel.monster[i].life -= -1;
+                    myPanel.monster[i].invincible = true;
+                    if(myPanel.monster[i].life < 0){
+                         myPanel.monster[i]=null;
+                    }
+               }
           }
      }
 

@@ -6,9 +6,7 @@ import UtilityTool.UtilityTool;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class Entity {
      public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
@@ -16,6 +14,7 @@ public class Entity {
      public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4;
      private String direction;
      public Rectangle solidArea;
+     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
      public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
      public boolean invincible = false;
@@ -93,7 +92,12 @@ public class Entity {
                     default:
                          break;
                }
+               if (invincible == true) {
+                    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+               }
                g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
+
+               g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
           }
      }
      public void setAction(){};
@@ -128,6 +132,13 @@ public class Entity {
                               break;
                          // case "stand":
                          // break;
+                    }
+               }
+               if (invincible == true ){
+                    invincibleCounter++;
+                    if(invincibleCounter > 40){
+                         invincible = false;
+                         invincibleCounter = 0;
                     }
                }
           }
