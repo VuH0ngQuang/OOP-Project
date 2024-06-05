@@ -128,6 +128,9 @@ public class Player extends Entity {
                     invincibleCounter = 0;
                }
           }
+          if(life <= 0 ){
+               myPanel.gameState = myPanel.gameOverState;
+          }
      }
 
      public void attacking() {

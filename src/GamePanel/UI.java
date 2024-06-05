@@ -120,6 +120,10 @@ public class UI {
                     }
                 }
             }
+            // GAME OVER STATE
+            if(gp.gameState == gp.gameOverState){
+                drawGameOverScreen();
+            }
         }
     }
 
@@ -228,6 +232,15 @@ public class UI {
     public void showMessage(String text) {
         message = text;
         messageOn = true;
+    }
+
+    public void drawGameOverScreen(){
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
+        int x;
+        int y;
+        String text;
+        g2.setFont();
     }
 
 }
