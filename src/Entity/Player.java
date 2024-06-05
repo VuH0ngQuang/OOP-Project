@@ -221,7 +221,7 @@ public class Player extends Entity {
      public void damageMonster(int i) {
           if (i != 999) {
                if (myPanel.enemy[i].invincible == false) {
-                    myPanel.enemy[i].life -= -1;
+                    myPanel.enemy[i].life -= 1;
                     myPanel.enemy[i].invincible = true;
                     if (myPanel.enemy[i].life <= 0) {
                          mp.enemy[i].dying = true;
