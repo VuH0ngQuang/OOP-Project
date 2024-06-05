@@ -35,6 +35,7 @@ public class Player extends Entity {
           solidArea.width = 24;
           solidArea.height = 28;
           getPlayerImage();
+          getPlayerAttackImage();
           set_direction("down");
           // PLAYER STATUS
           maxLife = 6;
@@ -43,9 +44,15 @@ public class Player extends Entity {
 
      // update value
      public void update() {
+
           if (keyMoving.getRight() == true || keyMoving.getLeft() == true ||
                     keyMoving.getUp() == true
-                    || keyMoving.getDown() == true) {
+                    || keyMoving.getDown() == true || keyMoving.getEnter() == true) {
+
+               if(keyMoving.getEnter() == true){
+                    attacking();
+                    System.out.println("attacking");
+               }
                if (keyMoving.getUp() == true) {
                     set_direction("up");
                }
@@ -81,7 +88,7 @@ public class Player extends Entity {
                pickUpObject(objIndex);
 
                // IF COLLISION IS FALSE, PLAYER CAN MOVE
-               if (collisionOn == false) {
+               if (collisionOn == false && keyMoving.getEnter() == false) {
 
                     switch (get_direction()) {
                          case "up":
@@ -119,6 +126,22 @@ public class Player extends Entity {
                     invincibleCounter = 0;
                }
           }
+     }
+
+     public void attacking(){
+         spriteCounter++;
+         if(spriteCounter<=5){
+              spriteNum = 1;
+         }
+         if(spriteCounter > 5 && spriteCounter <= 25){
+             spriteNum = 2;
+         }
+         if(spriteCounter > 25){
+              spriteNum = 1;
+              spriteCounter = 0;
+              attacking = false;
+         }
+
      }
 
      public void pickUpObject(int i) {
@@ -172,38 +195,63 @@ public class Player extends Entity {
 
           switch (get_direction()) {
                case "up":
-                    if (get_spriteNum() == 1) {
-                         image = get_up1();
+                    if (attacking == false){
+                         if (get_spriteNum() == 1) {
+                              image = get_up1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_up2();
+                         }
                     }
-                    if (get_spriteNum() == 2) {
-                         image = get_up2();
+                    if(attacking == true){
+                         if(spriteNum == 1){image = attackUp1;}
+                         if(spriteNum == 2){image = attackUp2;}
                     }
                     break;
 
                case "down":
-                    if (get_spriteNum() == 1) {
-                         image = get_down1();
+                    if (attacking == false){
+                         if (get_spriteNum() == 1) {
+                              image = get_down1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_down2();
+                         }
                     }
-                    if (get_spriteNum() == 2) {
-                         image = get_down2();
+                    if(attacking == true){
+                         if(spriteNum == 1){image = attackDown1;}
+                         if(spriteNum == 2){image = attackDown2;}
                     }
+
                     break;
 
                case "left":
-                    if (get_spriteNum() == 1) {
-                         image = get_left1();
+                    if (attacking == false){
+                         if (get_spriteNum() == 1) {
+                              image = get_left1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_left2();
+                         }
                     }
-                    if (get_spriteNum() == 2) {
-                         image = get_left2();
+                    if(attacking == true){
+                         if(spriteNum == 1){image = attackLeft1;}
+                         if(spriteNum == 2){image = attackLeft2;}
                     }
                     break;
 
                case "right":
-                    if (get_spriteNum() == 1) {
-                         image = get_right1();
+                    if (attacking == false){
+                         if (get_spriteNum() == 1) {
+                              image = get_right1();
+                         }
+                         if (get_spriteNum() == 2) {
+                              image = get_right2();
+                         }
                     }
-                    if (get_spriteNum() == 2) {
-                         image = get_right2();
+                    if(attacking == true){
+                         if(spriteNum == 1){image = attackRight1;}
+                         if(spriteNum == 2){image = attackRight2;}
                     }
                     break;
 
@@ -237,6 +285,22 @@ public class Player extends Entity {
           } catch (IOException e) {
                e.printStackTrace();
           }
+     }
+     public void getPlayerAttackImage(){
+          attackUp1 = setup("/Player/ninja_up_attack_1.png");
+          attackUp2 = setup("/Player/ninja_up_attack_2.png");
+          attackDown1 = setup("/Player/ninja_down_attack_1.png");
+          attackDown2 = setup("/Player/ninja_down_attack_2.png");
+          attackDown3 = setup("/Player/ninja_down_attack_3.png");
+          attackDown4 = setup("/Player/ninja_down_attack_4.png");
+          attackLeft1 = setup("/Player/ninja_left_attack_1.png");
+          attackLeft2 = setup("/Player/ninja_left_attack_2.png");
+          attackLeft3 = setup("/Player/ninja_left_attack_3.png");
+          attackLeft4 = setup("/Player/ninja_left_attack_4.png");
+          attackRight1 = setup("/Player/ninja_right_attack_1.png");
+          attackRight2 = setup("/Player/ninja_right_attack_2.png");
+          attackRight3 = setup("/Player/ninja_right_attack_3.png");
+          attackRight4 = setup("/Player/ninja_right_attack_4.png");
      }
 
      public int getScreenX() {

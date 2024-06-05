@@ -196,7 +196,7 @@ public class UI {
         y += gp.tileSize * 6;
         g2.drawString(text, x, y);
         if (commandNum == 0) {
-            g2.drawString("✧", x - gp.tileSize * 2, y);
+            g2.drawString("☠", x - gp.tileSize * 2, y);
         }
 
         text = "QUIT";
@@ -204,7 +204,7 @@ public class UI {
         y += gp.tileSize * 2;
         g2.drawString(text, x, y);
         if (commandNum == 1) {
-            g2.drawString("✧", x - gp.tileSize * 2, y);
+            g2.drawString("☠", x - gp.tileSize * 2, y);
         }
 
     }

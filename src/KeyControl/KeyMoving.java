@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class KeyMoving implements KeyListener {
 
-     private boolean up, down, left, right;
+     private boolean up, down, left, right, enter;
      private MyPanel gp;
 
      public KeyMoving(MyPanel gp) {
@@ -94,6 +94,10 @@ public class KeyMoving implements KeyListener {
                     setRight(false);
                     break;
 
+               case KeyEvent.VK_ENTER:
+                    setEnter(false);
+                    break;
+
                default:
                     break;
           }
@@ -130,6 +134,14 @@ public class KeyMoving implements KeyListener {
 
      public boolean getRight() {
           return right;
+     }
+
+     public void setEnter(boolean enter) {
+          this.enter = enter;
+     }
+
+     public boolean getEnter() {
+          return enter;
      }
 
 }

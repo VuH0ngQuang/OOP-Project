@@ -6,17 +6,20 @@ import UtilityTool.UtilityTool;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Entity {
-     private int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
+     public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
      private BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4;
      private String direction;
      public Rectangle solidArea;
      public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
      public boolean invincible = false;
+     boolean attacking = false;
      public int invincibleCounter = 0;
      public int type; // 0 = player 1 = enemy
      public BufferedImage setup (String pathImage) {
@@ -276,3 +279,4 @@ public class Entity {
      }
 
 }
+
