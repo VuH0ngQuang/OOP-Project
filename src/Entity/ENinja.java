@@ -13,7 +13,7 @@ public ENinja(MyPanel mp) {
         type = 1;
         name = "ENinja";
         set_speed(1);
-        maxLife = 4;
+        maxLife = 1;
         life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 12;

@@ -18,8 +18,11 @@ public class Entity {
      public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
      public boolean collisionOn = false;
      public boolean invincible = false;
+     public boolean alive = true;
+     public boolean dying = false;
      boolean attacking = false;
      public int invincibleCounter = 0;
+     int dyingCounter = 0;
      public int type; // 0 = player 1 = enemy
      public BufferedImage setup (String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
@@ -95,10 +98,32 @@ public class Entity {
                if (invincible == true) {
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
                }
+               if(dying == true){
+                    dyingAnimation(g2);
+                    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+               }
                g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
 
                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
           }
+     }
+     public void dyingAnimation(Graphics2D g2){
+          dyingCounter++;
+          if(dyingCounter <= 5){changeAlpha(g2, 0f);}
+          if(dyingCounter > 5 && dyingCounter <= 10){changeAlpha(g2, 1f);}
+          if(dyingCounter > 10 && dyingCounter <= 15){changeAlpha(g2, 0f);}
+          if(dyingCounter > 15 && dyingCounter <= 20){changeAlpha(g2, 1f);}
+          if(dyingCounter > 20 && dyingCounter <= 25){changeAlpha(g2, 0f);}
+          if(dyingCounter > 25 && dyingCounter <= 30){changeAlpha(g2, 1f);}
+          if(dyingCounter > 30 && dyingCounter <= 35){changeAlpha(g2, 0f);}
+          if(dyingCounter > 35 && dyingCounter <= 40){changeAlpha(g2, 1f);}
+          if(dyingCounter > 40){
+               dying = false;
+               alive = false;
+          }
+     }
+     public void changeAlpha(Graphics2D g2, float alphaValue){
+          g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
      }
      public void setAction(){};
      public void update(){

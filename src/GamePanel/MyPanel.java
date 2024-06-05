@@ -129,6 +129,16 @@ public class MyPanel extends JPanel implements Runnable {
                          enemy[i].update();
                     }
                }
+               for (int i = 0; i < enemy.length; i++) {
+                    if (enemy[i] != null) {
+                         if(enemy[i].alive == true && enemy[i].dying == false){
+                              enemy[i].update();
+                         }
+                         if(enemy[i].alive == false){
+                              enemy[i] = null;
+                         }
+                    }
+               }
           }
      }
 
