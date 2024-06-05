@@ -70,6 +70,10 @@ public class KeyMoving implements KeyListener {
                     setRight(true);
                     break;
 
+               case KeyEvent.VK_ENTER:
+                    setEnter(true);
+                    break;
+
                default:
                     break;
           }

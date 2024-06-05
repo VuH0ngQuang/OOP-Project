@@ -12,7 +12,7 @@ public class Player extends Entity {
      // object create
      MyPanel myPanel;
      KeyMoving keyMoving;
-
+     private boolean attacking = false;
      public final int screenX;
      public final int screenY;
 
@@ -44,15 +44,15 @@ public class Player extends Entity {
 
      // update value
      public void update() {
-
-          if (keyMoving.getRight() == true || keyMoving.getLeft() == true ||
+          if(attacking == true){
+               attacking();
+          }
+          else if (keyMoving.getRight() == true || keyMoving.getLeft() == true ||
                     keyMoving.getUp() == true
                     || keyMoving.getDown() == true || keyMoving.getEnter() == true) {
+               if (keyMoving.getEnter() == true) {
+                    attacking = true;}
 
-               if(keyMoving.getEnter() == true){
-                    attacking();
-                    System.out.println("attacking");
-               }
                if (keyMoving.getUp() == true) {
                     set_direction("up");
                }
@@ -128,20 +128,19 @@ public class Player extends Entity {
           }
      }
 
-     public void attacking(){
-         spriteCounter++;
-         if(spriteCounter<=5){
-              spriteNum = 1;
-         }
-         if(spriteCounter > 5 && spriteCounter <= 25){
-             spriteNum = 2;
-         }
-         if(spriteCounter > 25){
-              spriteNum = 1;
-              spriteCounter = 0;
-              attacking = false;
-         }
-
+     public void attacking() {
+          spriteCounter++;
+          if (spriteCounter <= 5) {
+               spriteNum = 1;
+          }
+          if (spriteCounter > 5 && spriteCounter <= 25) {
+               spriteNum = 2;
+          }
+          if (spriteCounter > 25) {
+               spriteNum = 1;
+               spriteCounter = 0;
+               attacking = false;
+          }
      }
 
      public void pickUpObject(int i) {
