@@ -56,26 +56,29 @@ public class CollisionChecker {
                 }
                 break;
 
+            default:
+                break;
             // case "stand":
             // break;
         }
     }
-    public int checkObject(Entity entity, boolean player){
+
+    public int checkObject(Entity entity, boolean player) {
         int index = 999; // index of the object is unique
-        for(int i = 0; i <  mp.obj.length; i++){
-            if(mp.obj[i] != null){
-                //get entity's solid area position
+        for (int i = 0; i < mp.obj.length; i++) {
+            if (mp.obj[i] != null) {
+                // get entity's solid area position
                 entity.solidArea.x = entity.get_worldX() + entity.solidArea.x;
                 entity.solidArea.y = entity.get_worldY() + entity.solidArea.y;
 
-                //get the object's solid area position
+                // get the object's solid area position
                 mp.obj[i].solidArea.x = mp.obj[i].worldX + mp.obj[i].solidArea.x;
                 mp.obj[i].solidArea.y = mp.obj[i].worldY + mp.obj[i].solidArea.y;
 
-                switch (entity.get_direction()){
+                switch (entity.get_direction()) {
                     case "up":
                         entity.solidArea.y -= entity.get_speed();
-                        if(entity.solidArea.intersects(mp.obj[i].solidArea)){
+                        if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
                             entity.collisionOn = true;
                             index = i;
                         }
@@ -83,7 +86,7 @@ public class CollisionChecker {
 
                     case "down":
                         entity.solidArea.y += entity.get_speed();
-                        if(entity.solidArea.intersects(mp.obj[i].solidArea)){
+                        if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
                             entity.collisionOn = true;
                             index = i;
                         }
@@ -91,7 +94,7 @@ public class CollisionChecker {
 
                     case "left":
                         entity.solidArea.x -= entity.get_speed();
-                        if(entity.solidArea.intersects(mp.obj[i].solidArea)){
+                        if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
                             entity.collisionOn = true;
                             index = i;
                         }
@@ -99,7 +102,7 @@ public class CollisionChecker {
 
                     case "right":
                         entity.solidArea.x += entity.get_speed();
-                        if(entity.solidArea.intersects(mp.obj[i].solidArea)){
+                        if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
                             entity.collisionOn = true;
                             index = i;
                         }
@@ -113,21 +116,22 @@ public class CollisionChecker {
         }
         return index;
     }
-    //ENEMY
-    public int checkEntity(Entity entity, Entity[] target){
+
+    // ENEMY
+    public int checkEntity(Entity entity, Entity[] target) {
         int index = 999; // index of the object is unique
-        for(int i = 0; i <  target.length; i++){
-            if(target[i] != null){
-                //get entity's solid area position
+        for (int i = 0; i < target.length; i++) {
+            if (target[i] != null) {
+                // get entity's solid area position
                 entity.solidArea.x = entity.get_worldX() + entity.solidArea.x;
                 entity.solidArea.y = entity.get_worldY() + entity.solidArea.y;
 
-                //get the object's solid area position
+                // get the object's solid area position
                 target[i].solidArea.x = target[i].get_worldX() + target[i].solidArea.x;
                 target[i].solidArea.y = target[i].get_worldY() + target[i].solidArea.y;
 
-                if (entity.get_direction() != null){
-                    switch (entity.get_direction()){
+                if (entity.get_direction() != null) {
+                    switch (entity.get_direction()) {
                         case "up":
                             entity.solidArea.y -= entity.get_speed();
                             break;
@@ -142,8 +146,8 @@ public class CollisionChecker {
                             break;
                     }
                 }
-                if(entity.solidArea.intersects(target[i].solidArea)){
-                    if (target[i] != entity){
+                if (entity.solidArea.intersects(target[i].solidArea)) {
+                    if (target[i] != entity) {
                         entity.collisionOn = true;
                         index = i;
                     }
@@ -156,18 +160,19 @@ public class CollisionChecker {
         }
         return index;
     }
-    public boolean checkPlayer(Entity entity){
+
+    public boolean checkPlayer(Entity entity) {
         boolean contactPlayer = false;
-        //get entity's solid area position
+        // get entity's solid area position
         entity.solidArea.x = entity.get_worldX() + entity.solidArea.x;
         entity.solidArea.y = entity.get_worldY() + entity.solidArea.y;
 
-        //get the object's solid area position
+        // get the object's solid area position
         mp.player.solidArea.x = mp.player.get_worldX() + mp.player.solidArea.x;
         mp.player.solidArea.y = mp.player.get_worldY() + mp.player.solidArea.y;
 
-        if (entity.get_direction() != null){
-            switch (entity.get_direction()){
+        if (entity.get_direction() != null) {
+            switch (entity.get_direction()) {
                 case "up":
                     entity.solidArea.y -= entity.get_speed();
                     break;
@@ -182,7 +187,7 @@ public class CollisionChecker {
                     break;
             }
         }
-        if(entity.solidArea.intersects(mp.player.solidArea)){
+        if (entity.solidArea.intersects(mp.player.solidArea)) {
             entity.collisionOn = true;
             contactPlayer = true;
         }
@@ -191,6 +196,6 @@ public class CollisionChecker {
         mp.player.solidArea.x = mp.player.solidAreaDefaultX;
         mp.player.solidArea.y = mp.player.solidAreaDefaultY;
 
-        return  contactPlayer;
+        return contactPlayer;
     }
 }

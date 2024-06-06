@@ -2,7 +2,6 @@ package Entity;
 
 import GamePanel.MyPanel;
 
-
 import java.awt.*;
 
 import java.util.Random;
@@ -22,6 +21,7 @@ public class ENinja extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 24;
         solidArea.height = 28;
+        set_direction("down");
 
         getImage();
     }
@@ -37,28 +37,27 @@ public class ENinja extends Entity {
         set_right2(setup("/Enemy/ninja2_right_2.png"));
     }
 
-
     @Override
     public void setAction() {
-//        int xDistance = Math.abs(worldX - mp.player.worldX);
-//        int yDistance = Math.abs(worldY - mp.player.worldY);
-//        int tileDistance = (xDistance + yDistance) / mp.tileSize;
+        // int xDistance = Math.abs(worldX - mp.player.worldX);
+        // int yDistance = Math.abs(worldY - mp.player.worldY);
+        // int tileDistance = (xDistance + yDistance) / mp.tileSize;
         if (onPath == true) {
-            //check if it stops chasing
+            // check if it stops chasing
             checkStopChasingOrNot(mp.player, 15, 100);
-//            if (tileDistance > 20) {
-//                onPath = false;
-//            }
-            //search the direction to go
-//            int goalCol = (mp.player.worldX + mp.player.solidArea.x)/mp.tileSize;
-//            int goalRow = (mp.player.worldY + mp.player.solidArea.y)/mp.tileSize;
+            // if (tileDistance > 20) {
+            // onPath = false;
+            // }
+            // search the direction to go
+            // int goalCol = (mp.player.worldX + mp.player.solidArea.x)/mp.tileSize;
+            // int goalRow = (mp.player.worldY + mp.player.solidArea.y)/mp.tileSize;
             searchPath(getGoalCol(mp.player), getGoalRow(mp.player));
 
         } else {
-            //check if it starts chasing
+            // check if it starts chasing
             checkStartChasingOrNot(mp.player, 5, 100);
-//            if(onPath == true && tileDistance > 20){
-//                onPath = false;
+            // if(onPath == true && tileDistance > 20){
+            // onPath = false;
             // Get a random direction
             getRandomDirection();
         }
