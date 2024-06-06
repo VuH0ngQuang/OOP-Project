@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 public class Entity {
      public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
@@ -24,6 +25,34 @@ public class Entity {
      public int invincibleCounter = 0;
      int dyingCounter = 0;
      public int type; // 0 = player 1 = enemy
+     public boolean onPath = false;
+
+     public int getXdistance (Entity target){
+          int xDistance = Math.abs(worldX - target.worldX);
+          return xDistance;
+     }
+
+     public int getYdistance (Entity target){
+          int yDistance = Math.abs(worldY - target.worldY);
+          return yDistance;
+     }
+
+     public int getTileDistance (Entity target){
+          int tileDistance = (getXdistance(target) + getYdistance(target)/ mp.tileSize);
+          return tileDistance;
+     }
+
+     public int getGoalCol(Entity target){
+          int goalCol = (target.worldX + target.solidArea.x)/mp.tileSize;
+          return goalCol;
+     }
+
+     public int getGoalRow(Entity target){
+          int goalRow = (target.worldY + target.solidArea.y)/mp.tileSize;
+          return goalRow;
+     }
+
+
      public BufferedImage setup (String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
           BufferedImage image = null;
@@ -43,6 +72,15 @@ public class Entity {
           this.width = width;
           this.height = height;
      }
+
+     public void checkCollision(){
+          collisionOn = false;
+          mp.collisionChecker.checkTile(this);
+          mp.collisionChecker.checkObject(this, false);
+          mp.collisionChecker.checkEntity(this, mp.enemy);
+          boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
+     }
+
      public void draw(Graphics2D g2){
           BufferedImage image = null;
           int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
@@ -127,6 +165,7 @@ public class Entity {
      }
      public void setAction(){};
      public void update(){
+          checkCollision();
           setAction();
           collisionOn = false;
           mp.collisionChecker.checkEntity(this, mp.enemy);
@@ -178,6 +217,76 @@ public class Entity {
                set_spriteCounter(0);
           }
      }
+
+     public void checkStartChasingOrNot(Entity target, int distance, int rate){
+          if(getTileDistance(target) < distance){
+               int i = new Random().nextInt(rate);
+               if(i == 0){
+                    onPath = true;
+               }
+          }
+     }
+
+     public void checkStopChasingOrNot(Entity target, int distance, int rate){
+          if(getTileDistance(target) > distance){
+               int i = new Random().nextInt(rate);
+               if(i == 0){
+                    onPath = false;
+               }
+          }
+     }
+
+     public void getRandomDirection(){
+          actionLockCounter++;
+          if (actionLockCounter == 120) {
+//            System.out.println("actionLockCounter: " + actionLockCounter); // Debug print statement
+               Random random = new Random();
+               int i = random.nextInt(100) + 1;
+               if (i <= 25) {
+                    set_direction("up");
+               } else if (i <= 50) {
+                    set_direction("down");
+               } else if (i <= 75) {
+                    set_direction("left");
+               } else {
+                    set_direction("right");
+               }
+//            System.out.println("Direction set to: " + get_direction()); // Debug print statement
+               actionLockCounter = 0;
+          }
+     }
+
+     public void checkAttackOrNot(int rate, int straight, int hilizontal) {
+          boolean targetInrange = false;
+          int xDis = getXdistance(mp.player);
+          int yDis = getYdistance(mp.player);
+
+          switch (direction) {
+               case "up":
+                    if (mp.player.worldY < worldY && yDis < straight && xDis < hilizontal){
+                         targetInrange = true;
+                    }
+                    break;
+                    case "down":
+                         if (mp.player.worldY > worldY && yDis < straight && xDis < hilizontal){
+                              targetInrange = true;
+                         }
+                         break;
+                         case "left":
+                              if (mp.player.worldX < worldX && xDis < straight && yDis < hilizontal){
+                                   targetInrange = true;
+                              }
+                              break;
+                              case "right":
+                                   if (mp.player.worldX > worldX && xDis < straight && yDis < hilizontal){
+                                        targetInrange = true;
+                                   }
+                                   break;
+          }
+     }
+
+     public void searchPath(int goalCol, int goalRow){}
+
      MyPanel mp;
      public Entity(MyPanel mp){
           this.mp = mp;
