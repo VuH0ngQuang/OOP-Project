@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Entity {
      public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
-     private BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+     private BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
      public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4;
      private String direction;
      public Rectangle solidArea;
@@ -23,6 +23,11 @@ public class Entity {
      boolean attacking = false;
      public int invincibleCounter = 0;
      int dyingCounter = 0;
+     public int attack = 0;
+     public int maxMana;
+     public int mana;
+     public Projectile projectile;
+     public int useCost;
      public int type; // 0 = player 1 = enemy
      public BufferedImage setup (String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
@@ -178,7 +183,7 @@ public class Entity {
                set_spriteCounter(0);
           }
      }
-     MyPanel mp;
+     public MyPanel mp;
      public Entity(MyPanel mp){
           this.mp = mp;
      }
@@ -314,5 +319,13 @@ public class Entity {
           return spriteCounter;
      }
 
+     public BufferedImage get_up3() {return up3;}
+     public void set_up3(BufferedImage up3) {this.up3 = up3;}
+     public BufferedImage get_down3() {return down3;}
+     public void set_down3(BufferedImage down3) {this.down3 = down3;}
+     public BufferedImage get_left3() {return left3;}
+     public void set_left3(BufferedImage left3) {this.left3 = left3;}
+     public BufferedImage get_right3() {return right3;}
+     public void set_right3(BufferedImage right3) {this.right3 = right3;}
 }
 

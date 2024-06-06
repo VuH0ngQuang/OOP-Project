@@ -9,6 +9,7 @@ import Object.*;
 import Sound.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -24,7 +25,7 @@ public class MyPanel extends JPanel implements Runnable {
      private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
      private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
 
-     private final int FPS = 120;
+     private final int FPS = 60;
 
      // create object
      public TitleManager titleManager = new TitleManager(this);
@@ -35,6 +36,7 @@ public class MyPanel extends JPanel implements Runnable {
                            // default starting position at 3:2
      public SuperObject[] obj = new SuperObject[10];
      public Entity[] enemy = new Entity[10];
+     public ArrayList<Entity> projectileList = new ArrayList<>();
      public AssetSetter assetSetter = new AssetSetter(this);
      public UI ui = new UI(this);
 
@@ -140,6 +142,16 @@ public class MyPanel extends JPanel implements Runnable {
                          }
                     }
                }
+               for (int i = 0; i < projectileList.size(); i++) {
+                    if (projectileList.get(i) != null) {
+                         if(projectileList.get(i).alive == true){
+                              projectileList.get(i).update();
+                         }
+                         if(projectileList.get(i).alive == false){
+                              projectileList.remove(i);
+                         }
+                    }
+               }
           }
      }
 
@@ -164,6 +176,12 @@ public class MyPanel extends JPanel implements Runnable {
                for (Entity e : enemy) {
                     if (e != null) {
                          e.draw(g2);
+                    }
+               }
+               //Draw dart
+               for (int i = 0; i < projectileList.size(); i++) {
+                    if (projectileList.get(i) != null) {
+                         projectileList.get(i).draw(g2);
                     }
                }
                // draw player

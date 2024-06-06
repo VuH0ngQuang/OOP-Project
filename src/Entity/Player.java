@@ -2,6 +2,7 @@ package Entity;
 
 import GamePanel.*;
 import KeyControl.*;
+import Object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,7 @@ public class Player extends Entity {
           solidArea.height = 28;
           attackArea.width = 36;
           attackArea.height = 36;
+          projectile = new OBJ_Dart(mp);
           getPlayerImage();
           getPlayerAttackImage();
           set_direction("down");
@@ -119,6 +121,12 @@ public class Player extends Entity {
                     }
                     set_spriteCounter(0);
                }
+          }
+          if(keyMoving.getSpace() == true && projectile.alive == false){
+                // SET DEFAULT COORDINATES, DIRECTION AND USER
+                projectile.set(get_worldX(), get_worldY(), get_direction(), true, this);
+                // ADD IT TO THE LIST
+               myPanel.projectileList.add(projectile);
           }
           // this shit needs to be outside of key if statement !
           if (invincible == true) {
