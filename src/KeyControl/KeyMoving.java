@@ -53,7 +53,7 @@ public class KeyMoving implements KeyListener {
                }
           }
           // TITLE STATE
-          if (gp.gameState == gp.gameOverState) {
+          else if (gp.gameState == gp.gameOverState) {
                if (code == KeyEvent.VK_W) {
                     gp.ui.commandNum--;
                     if (gp.ui.commandNum < 0) {
@@ -69,6 +69,7 @@ public class KeyMoving implements KeyListener {
                if (code == KeyEvent.VK_ENTER) {
                     if (gp.ui.commandNum == 0) {
                          gp.gameState = gp.titleState;
+                         // gp.player.life = 6;
                     }
                     if (gp.ui.commandNum == 1) {
                          System.exit(0);
@@ -76,30 +77,31 @@ public class KeyMoving implements KeyListener {
                }
           }
 
+          else {
+               switch (e.getKeyCode()) {
+                    case KeyEvent.VK_W:
+                         setUp(true);
+                         break;
 
-          switch (e.getKeyCode()) {
-               case KeyEvent.VK_W:
-                    setUp(true);
-                    break;
+                    case KeyEvent.VK_S:
+                         setDown(true);
+                         break;
 
-               case KeyEvent.VK_S:
-                    setDown(true);
-                    break;
+                    case KeyEvent.VK_A:
+                         setLeft(true);
+                         break;
 
-               case KeyEvent.VK_A:
-                    setLeft(true);
-                    break;
+                    case KeyEvent.VK_D:
+                         setRight(true);
+                         break;
 
-               case KeyEvent.VK_D:
-                    setRight(true);
-                    break;
+                    case KeyEvent.VK_ENTER:
+                         setEnter(true);
+                         break;
 
-               case KeyEvent.VK_ENTER:
-                    setEnter(true);
-                    break;
-
-               default:
-                    break;
+                    default:
+                         break;
+               }
           }
      }
 

@@ -200,7 +200,7 @@ public class Player extends Entity {
                          break;
 
                     case "Chest":
-                         myPanel.ui.gameFinished = true;
+                         myPanel.gameState = myPanel.gameWinState;
                          break;
 
                     case "Hear":

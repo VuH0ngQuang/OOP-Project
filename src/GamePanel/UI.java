@@ -59,7 +59,7 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-        if (gameFinished) {
+        if (gp.gameState == gp.gameWinState) {
 
             g2.setFont(arial_24);
             g2.setColor(Color.white);
@@ -89,7 +89,6 @@ public class UI {
             g2.drawString(text, x, y);
 
             gp.gameThread = null;
-
         } else {
             this.g2 = g2;
             g2.setFont(maruMonica);
@@ -121,7 +120,7 @@ public class UI {
                 }
             }
             // GAME OVER STATE
-            if(gp.gameState == gp.gameOverState){
+            if (gp.gameState == gp.gameOverState) {
                 drawGameOverScreen();
             }
         }
@@ -234,7 +233,7 @@ public class UI {
         messageOn = true;
     }
 
-    public void drawGameOverScreen(){
+    public void drawGameOverScreen() {
         g2.setColor(new Color(107, 0, 119, 231));
         g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
         int x;
@@ -242,31 +241,31 @@ public class UI {
         String text;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
         text = "You Die, Loser <3";
-        //Shadow
+        // Shadow
         g2.setColor(Color.black);
         x = getXforCenteredText(text);
         y = gp.tileSize * 4;
         g2.drawString(text, x, y);
-        //Main
+        // Main
         g2.setColor(Color.white);
-        g2.drawString(text, x-4, y-4);
+        g2.drawString(text, x - 4, y - 4);
 
-        //Retry
+        // Retry
         g2.setFont(g2.getFont().deriveFont(50f));
         text = "BACK TO MENU ♡";
         x = getXforCenteredText(text);
         y += gp.tileSize * 4;
         g2.drawString(text, x, y);
-        if(commandNum == 0){
-            g2.drawString("❤", x-40,y);
+        if (commandNum == 0) {
+            g2.drawString("❤", x - 40, y);
         }
-        //Back to title screen
+        // Back to title screen
         text = "Quit";
         x = getXforCenteredText(text);
         y += 55;
         g2.drawString(text, x, y);
-        if(commandNum == 1){
-            g2.drawString("❤", x-40,y);
+        if (commandNum == 1) {
+            g2.drawString("❤", x - 40, y);
         }
     }
 
