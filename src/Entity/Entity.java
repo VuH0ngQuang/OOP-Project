@@ -47,7 +47,6 @@ public class Entity {
           this.speed = speed;
           this.width = width;
           this.height = height;
-          this.mp = mp;
      }
      public void draw(Graphics2D g2){
           BufferedImage image = null;

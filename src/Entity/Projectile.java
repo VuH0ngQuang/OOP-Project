@@ -16,6 +16,16 @@ public class Projectile extends Entity{
         this.life = maxLife;
     }
     public void update(){
+        if(user == mp.player){
+            int enemyIndex = mp.collisionChecker.checkEntity(this, mp.enemy);
+            if (enemyIndex != 999){
+                mp.player.damageMonster(enemyIndex);
+                alive = false;
+            }
+        }
+        if (user != mp.player){
+
+        }
         switch (get_direction()){
             case "up":
                 worldY -= speed;
