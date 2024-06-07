@@ -274,7 +274,6 @@ public class UI {
         y = gp.getScreenHeight() / 2 + (gp.tileSize * 2);
         g2.drawString(text, x, y);
 
-        gp.gameThread = null;
         g2.setFont(g2.getFont().deriveFont(50f));
         text = "BACK TO MENU ♡";
         x = getXforCenteredText(text);

@@ -17,7 +17,15 @@ public class KeyMoving implements KeyListener {
      // moving listening event
      @Override
      public void keyTyped(KeyEvent e) {
+
+     }
+
+     @Override
+     public void keyPressed(KeyEvent e) {
+          // if (gp == null)
+          // return;
           int code = e.getKeyCode();
+
           // TITLE STATE
           if (gp.gameState == gp.titleState || gp.gameState == gp.gameOverState || gp.gameState == gp.gameWinState) {
                switch (code) {
@@ -35,8 +43,14 @@ public class KeyMoving implements KeyListener {
                          break;
                     case KeyEvent.VK_ENTER:
                          if (gp.ui.commandNum == 0) {
-                              gp.gameState = gp.playState;
+                              if (gp.gameState == gp.titleState)
+                                   gp.gameState = gp.playState;
 
+                              if (gp.gameState == gp.gameOverState)
+                                   gp.gameState = gp.titleState;
+
+                              if (gp.gameState == gp.gameWinState)
+                                   gp.gameState = gp.titleState;
                               // begin play music
                               // gp.playMusic(0);
                          }
@@ -48,13 +62,6 @@ public class KeyMoving implements KeyListener {
                          break;
                }
           }
-     }
-
-     @Override
-     public void keyPressed(KeyEvent e) {
-          // if (gp == null)
-          // return;
-          int code = e.getKeyCode();
 
           // TITLE STATE
           // else if (gp.gameState == gp.gameOverState) {
@@ -81,7 +88,7 @@ public class KeyMoving implements KeyListener {
           // }
           // }
 
-          if (gp.gameState == gp.gameOverState) {
+          if (gp.gameState == gp.playState) {
                switch (code) {
                     case KeyEvent.VK_W:
                          setUp(true);
@@ -112,7 +119,7 @@ public class KeyMoving implements KeyListener {
      @Override
      public void keyReleased(KeyEvent e) {
           int code = e.getKeyCode();
-          if (gp.gameState == gp.gameOverState) {
+          if (gp.gameState == gp.playState) {
                switch (code) {
                     case KeyEvent.VK_W:
                          setUp(false);
