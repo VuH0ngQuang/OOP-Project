@@ -9,9 +9,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Entity {
-     public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0,con=1;
+     public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0, con = 1;
      private BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
-     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4, image;
+     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1,
+               attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4, image;
      private String direction;
      public Rectangle solidArea;
      public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
@@ -24,16 +25,18 @@ public class Entity {
      public int invincibleCounter = 0;
      int dyingCounter = 0;
      public int attack = 0;
+     public int shotAvailableCounter = 0;
      public int maxMana;
      public int mana;
      public Projectile projectile;
      public int useCost;
      public int type; // 0 = player 1 = enemy
-     public BufferedImage setup (String pathImage) {
+
+     public BufferedImage setup(String pathImage) {
           UtilityTool utilityTool = new UtilityTool();
           BufferedImage image = null;
           try {
-//               System.out.println(pathImage);
+               // System.out.println(pathImage);
                image = ImageIO.read(getClass().getResourceAsStream(pathImage));
                image = utilityTool.scaleImage(image, 48, 48);
           } catch (IOException e) {
@@ -41,21 +44,23 @@ public class Entity {
           }
           return image;
      }
-     public Entity(int x, int y, int speed, int height, int width){
+
+     public Entity(int x, int y, int speed, int height, int width) {
           this.worldX = x;
           this.worldY = y;
           this.speed = speed;
           this.width = width;
           this.height = height;
      }
-     public void draw(Graphics2D g2){
+
+     public void draw(Graphics2D g2) {
           BufferedImage image = null;
           int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
           int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
           if (worldX > mp.player.get_worldX() - mp.player.screenX &&
-                  worldX < mp.player.get_worldX() + mp.player.screenX &&
-                  worldY > mp.player.get_worldY() - mp.player.screenY &&
-                  worldY < mp.player.get_worldY() + mp.player.screenY){
+                    worldX < mp.player.get_worldX() + mp.player.screenX &&
+                    worldY > mp.player.get_worldY() - mp.player.screenY &&
+                    worldY < mp.player.get_worldY() + mp.player.screenY) {
                switch (get_direction()) {
                     case "up":
                          if (get_spriteNum() == 1) {
@@ -103,41 +108,62 @@ public class Entity {
                if (invincible == true) {
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
                }
-               if(dying == true){
+               if (dying == true) {
                     dyingAnimation(g2);
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
                }
-               g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
+               g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3, mp.getOriginalTileSize() * 3, null);
 
                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
           }
      }
-     public void dyingAnimation(Graphics2D g2){
+
+     public void dyingAnimation(Graphics2D g2) {
           dyingCounter++;
-          if(dyingCounter <= 5){changeAlpha(g2, 0f);}
-          if(dyingCounter > 5 && dyingCounter <= 10){changeAlpha(g2, 1f);}
-          if(dyingCounter > 10 && dyingCounter <= 15){changeAlpha(g2, 0f);}
-          if(dyingCounter > 15 && dyingCounter <= 20){changeAlpha(g2, 1f);}
-          if(dyingCounter > 20 && dyingCounter <= 25){changeAlpha(g2, 0f);}
-          if(dyingCounter > 25 && dyingCounter <= 30){changeAlpha(g2, 1f);}
-          if(dyingCounter > 30 && dyingCounter <= 35){changeAlpha(g2, 0f);}
-          if(dyingCounter > 35 && dyingCounter <= 40){changeAlpha(g2, 1f);}
-          if(dyingCounter > 40){
+          if (dyingCounter <= 5) {
+               changeAlpha(g2, 0f);
+          }
+          if (dyingCounter > 5 && dyingCounter <= 10) {
+               changeAlpha(g2, 1f);
+          }
+          if (dyingCounter > 10 && dyingCounter <= 15) {
+               changeAlpha(g2, 0f);
+          }
+          if (dyingCounter > 15 && dyingCounter <= 20) {
+               changeAlpha(g2, 1f);
+          }
+          if (dyingCounter > 20 && dyingCounter <= 25) {
+               changeAlpha(g2, 0f);
+          }
+          if (dyingCounter > 25 && dyingCounter <= 30) {
+               changeAlpha(g2, 1f);
+          }
+          if (dyingCounter > 30 && dyingCounter <= 35) {
+               changeAlpha(g2, 0f);
+          }
+          if (dyingCounter > 35 && dyingCounter <= 40) {
+               changeAlpha(g2, 1f);
+          }
+          if (dyingCounter > 40) {
                dying = false;
                alive = false;
           }
      }
-     public void changeAlpha(Graphics2D g2, float alphaValue){
+
+     public void changeAlpha(Graphics2D g2, float alphaValue) {
           g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
      }
-     public void setAction(){};
-     public void update(){
+
+     public void setAction() {
+     };
+
+     public void update() {
           setAction();
           collisionOn = false;
           mp.collisionChecker.checkEntity(this, mp.enemy);
           boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
-          if (this.type == 1 && contactPlayer){
-               if (mp.player.invincible == false){
+          if (this.type == 1 && contactPlayer) {
+               if (mp.player.invincible == false) {
                     mp.player.life--;
                     mp.player.invincible = true;
                }
@@ -145,7 +171,7 @@ public class Entity {
           if (get_direction() != null) {
                mp.collisionChecker.checkTile(this);
                // IF COLLISION IS FALSE, ENEMY CAN MOVE
-//               System.out.println(collisionOn);
+               // System.out.println(collisionOn);
                if (collisionOn == false) {
                     switch (get_direction()) {
                          case "up":
@@ -164,9 +190,9 @@ public class Entity {
                          // break;
                     }
                }
-               if (invincible == true ){
+               if (invincible == true) {
                     invincibleCounter++;
-                    if(invincibleCounter > 40){
+                    if (invincibleCounter > 40) {
                          invincible = false;
                          invincibleCounter = 0;
                     }
@@ -183,12 +209,13 @@ public class Entity {
                set_spriteCounter(0);
           }
      }
-     public void drawOBJ(Graphics2D g2, MyPanel mp){
+
+     public void drawOBJ(Graphics2D g2, MyPanel mp) {
           int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
           int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
-          if (get_spriteNum() == 1||get_spriteNum() == 2) {
+          if (get_spriteNum() == 1 || get_spriteNum() == 2) {
                if (con == 3)
-                    con=1;
+                    con = 1;
                else
                     con++;
           }
@@ -196,15 +223,15 @@ public class Entity {
                case "up":
                     if (con == 1) {
                          image = get_up1();
-//                         System.out.println("1");
+                         // System.out.println("1");
                     }
                     if (con == 2) {
                          image = get_up2();
-//                         System.out.println("2");
+                         // System.out.println("2");
                     }
                     if (con == 3) {
                          image = get_up3();
-//                         System.out.println("3");
+                         // System.out.println("3");
                     }
                     break;
 
@@ -251,19 +278,24 @@ public class Entity {
                default:
                     break;
           }
-          g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
+          g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3, mp.getOriginalTileSize() * 3, null);
      }
+
      public MyPanel mp;
-     public Entity(MyPanel mp){
+
+     public Entity(MyPanel mp) {
           this.mp = mp;
      }
+
      public String name;
-     //CHARACTER STATUS
+     // CHARACTER STATUS
      public int maxLife;
      public int life;
 
      // set and get
-     public void set_worldX(int x) { this.worldX = x; }
+     public void set_worldX(int x) {
+          this.worldX = x;
+     }
 
      public int get_worldX() {
           return worldX;
@@ -389,13 +421,35 @@ public class Entity {
           return spriteCounter;
      }
 
-     public BufferedImage get_up3() {return up3;}
-     public void set_up3(BufferedImage up3) {this.up3 = up3;}
-     public BufferedImage get_down3() {return down3;}
-     public void set_down3(BufferedImage down3) {this.down3 = down3;}
-     public BufferedImage get_left3() {return left3;}
-     public void set_left3(BufferedImage left3) {this.left3 = left3;}
-     public BufferedImage get_right3() {return right3;}
-     public void set_right3(BufferedImage right3) {this.right3 = right3;}
-}
+     public BufferedImage get_up3() {
+          return up3;
+     }
 
+     public void set_up3(BufferedImage up3) {
+          this.up3 = up3;
+     }
+
+     public BufferedImage get_down3() {
+          return down3;
+     }
+
+     public void set_down3(BufferedImage down3) {
+          this.down3 = down3;
+     }
+
+     public BufferedImage get_left3() {
+          return left3;
+     }
+
+     public void set_left3(BufferedImage left3) {
+          this.left3 = left3;
+     }
+
+     public BufferedImage get_right3() {
+          return right3;
+     }
+
+     public void set_right3(BufferedImage right3) {
+          this.right3 = right3;
+     }
+}

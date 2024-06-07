@@ -122,11 +122,13 @@ public class Player extends Entity {
                     set_spriteCounter(0);
                }
           }
-          if(keyMoving.getSpace() == true && projectile.alive == false){
-                // SET DEFAULT COORDINATES, DIRECTION AND USER
-                projectile.set(get_worldX(), get_worldY(), get_direction(), true, this);
-                // ADD IT TO THE LIST
+          if (keyMoving.getSpace() == true && projectile.alive == false && shotAvailableCounter == 30) {
+               // SET DEFAULT COORDINATES, DIRECTION AND USER
+               projectile.set(get_worldX(), get_worldY(), get_direction(), true, this);
+               // ADD IT TO THE LIST
                myPanel.projectileList.add(projectile);
+
+               shotAvailableCounter = 0;
           }
           // this shit needs to be outside of key if statement !
           if (invincible == true) {
@@ -136,7 +138,10 @@ public class Player extends Entity {
                     invincibleCounter = 0;
                }
           }
-          if(life <= 0 ){
+          if (shotAvailableCounter < 30) {
+               shotAvailableCounter++;
+          }
+          if (life <= 0) {
                myPanel.gameState = myPanel.gameOverState;
           }
      }

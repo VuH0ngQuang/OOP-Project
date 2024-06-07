@@ -4,12 +4,14 @@ import GamePanel.MyPanel;
 
 import java.awt.*;
 
-public class Projectile extends Entity{
+public class Projectile extends Entity {
     Entity user;
-    public Projectile(MyPanel mp){
+
+    public Projectile(MyPanel mp) {
         super(mp);
     }
-    public void set(int worldX, int worldY, String dir, boolean alive, Entity user){
+
+    public void set(int worldX, int worldY, String dir, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
         set_direction(dir);
@@ -17,25 +19,26 @@ public class Projectile extends Entity{
         this.user = user;
         this.life = maxLife;
         solidArea = new Rectangle();
-        solidArea.x = 0;
-        solidArea.y = 0;
+        solidArea.x = 12;
+        solidArea.y = 20;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 16;
-        solidArea.height = 16;
+        solidArea.width = 24;
+        solidArea.height = 28;
     }
-    public void update(){
-        if(user == mp.player){
+
+    public void update() {
+        if (user == mp.player) {
             int enemyIndex = mp.collisionChecker.checkEntity(this, mp.enemy);
-            if (enemyIndex != 999){
+            if (enemyIndex != 999) {
                 mp.player.damageMonster(enemyIndex);
                 alive = false;
             }
         }
-        if (user != mp.player){
+        if (user != mp.player) {
 
         }
-        switch (get_direction()){
+        switch (get_direction()) {
             case "up":
                 worldY -= speed;
                 break;
@@ -49,8 +52,8 @@ public class Projectile extends Entity{
                 worldX += speed;
                 break;
         }
-        life --;
-        if (life <= 0){
+        life--;
+        if (life <= 0) {
             alive = false;
         }
         set_spriteCounter(get_spriteCounter() + 1);

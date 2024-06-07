@@ -4,7 +4,7 @@ import Entity.Projectile;
 import GamePanel.MyPanel;
 
 public class OBJ_Dart extends Projectile {
-    public OBJ_Dart(MyPanel mp){
+    public OBJ_Dart(MyPanel mp) {
         super(mp);
         this.mp = mp;
         name = "Dart";
@@ -16,7 +16,8 @@ public class OBJ_Dart extends Projectile {
         alive = false;
         getImage();
     }
-    public void getImage(){
+
+    public void getImage() {
         set_up1(setup("/Dart/bluedart_left_1.png"));
         set_up2(setup("/Dart/bluedart_left_2.png"));
         set_up3(setup("/Dart/bluedart_left_3.png"));
