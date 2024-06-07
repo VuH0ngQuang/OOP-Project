@@ -247,7 +247,7 @@ public class UI {
 
     public void drawGameWinScreen() {
 
-        g2.setFont(arial_24);
+        g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
         String text;
@@ -275,6 +275,22 @@ public class UI {
         g2.drawString(text, x, y);
 
         gp.gameThread = null;
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "BACK TO MENU ♡";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 2;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString("❤", x - 40, y);
+        }
+        // Back to title screen
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y += 55;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString("❤", x - 40, y);
+        }
     }
 
 }
