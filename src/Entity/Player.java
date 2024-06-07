@@ -37,7 +37,7 @@ public class Player extends Entity {
           solidArea.height = 28;
           attackArea.width = 36;
           attackArea.height = 36;
-          projectile = new OBJ_Dart(mp);
+          projectile = new OBJ_Dart(myPanel);
           getPlayerImage();
           getPlayerAttackImage();
           set_direction("down");

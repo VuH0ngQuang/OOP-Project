@@ -2,6 +2,8 @@ package Entity;
 
 import GamePanel.MyPanel;
 
+import java.awt.*;
+
 public class Projectile extends Entity{
     Entity user;
     public Projectile(MyPanel mp){
@@ -14,6 +16,13 @@ public class Projectile extends Entity{
         this.alive = alive;
         this.user = user;
         this.life = maxLife;
+        solidArea = new Rectangle();
+        solidArea.x = 0;
+        solidArea.y = 0;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 16;
+        solidArea.height = 16;
     }
     public void update(){
         if(user == mp.player){
