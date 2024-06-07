@@ -3,6 +3,8 @@ package CollisionChecker;
 import Entity.Entity;
 import GamePanel.MyPanel;
 
+import java.util.ArrayList;
+
 public class CollisionChecker {
     MyPanel mp;
 
@@ -61,7 +63,7 @@ public class CollisionChecker {
         }
     }
     public int checkObject(Entity entity, boolean player){
-        int index = 999; // index of the object is unique
+        int index = 999;
         for(int i = 0; i <  mp.obj.length; i++){
             if(mp.obj[i] != null){
                 //get entity's solid area position
@@ -115,7 +117,7 @@ public class CollisionChecker {
     }
     //ENEMY
     public int checkEntity(Entity entity, Entity[] target){
-        int index = 999; // index of the object is unique
+        int index = 999;
         for(int i = 0; i <  target.length; i++){
             if(target[i] != null){
                 //get entity's solid area position
@@ -192,5 +194,54 @@ public class CollisionChecker {
         mp.player.solidArea.y = mp.player.solidAreaDefaultY;
 
         return  contactPlayer;
+    }
+    public void objCollision(ArrayList<Entity> projectileList) {
+        for (int i = 0; i < projectileList.size(); i++) {
+            if (projectileList.get(i) != null) {
+                int entityLeftWorldX = projectileList.get(i).get_worldX() + projectileList.get(i).solidArea.x;
+                int entityRightWorldX = projectileList.get(i).get_worldX() + projectileList.get(i).solidArea.x + projectileList.get(i).solidArea.width;
+                int entityTopWorldY = projectileList.get(i).get_worldY() + projectileList.get(i).solidArea.y;
+                int entityBottomWorldY = projectileList.get(i).get_worldY() + projectileList.get(i).solidArea.y + projectileList.get(i).solidArea.height;
+                int entityLeftCol = entityLeftWorldX / (mp.getOriginalTileSize() * 3);
+                int entityRightCol = entityRightWorldX / (mp.getOriginalTileSize() * 3);
+                int entityTopRow = entityTopWorldY / (mp.getOriginalTileSize() * 3);
+                int entityBottomRow = entityBottomWorldY / (mp.getOriginalTileSize() * 3);
+                int tileNum1, tileNum2;
+
+                switch (projectileList.get(i).get_direction()) {
+                    case "up":
+                        entityTopRow = (entityTopWorldY - projectileList.get(i).get_speed()) / (mp.getOriginalTileSize() * 3);
+                        tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityTopRow];
+                        tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow];
+                        if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
+                            projectileList.get(i).alive = false;
+                        }
+                    case "down":
+                        entityBottomRow = (entityBottomWorldY + projectileList.get(i).get_speed()) / (mp.getOriginalTileSize() * 3);
+                        tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityBottomRow];
+                        tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow];
+                        if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
+                            projectileList.get(i).alive = false;
+                        }
+                        break;
+                    case "left":
+                        entityLeftCol = (entityLeftWorldX - projectileList.get(i).get_speed()) / (mp.getOriginalTileSize() * 3);
+                        tileNum1 = mp.titleManager.mapTileNum[entityLeftCol][entityTopRow];
+                        tileNum2 = mp.titleManager.mapTileNum[entityLeftCol][entityBottomRow];
+                        if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
+                            projectileList.get(i).alive = false;
+                        }
+                        break;
+                    case "right":
+                        entityRightCol = (entityRightWorldX + projectileList.get(i).get_speed()) / (mp.getOriginalTileSize() * 3);
+                        tileNum1 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow];
+                        tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityBottomRow];
+                        if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
+                            projectileList.get(i).alive = false;
+                        }
+                        break;
+                }
+            }
+        }
     }
 }

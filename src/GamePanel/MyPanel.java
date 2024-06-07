@@ -25,7 +25,7 @@ public class MyPanel extends JPanel implements Runnable {
      private final int screenWidth = getOriginalTileSize() * maxScreenCol; // 1296
      private final int screenHeight = getOriginalTileSize() * maxScreenRow; // 720
 
-     private final int FPS = 60;
+     private final int FPS = 120;
 
      // create object
      public TitleManager titleManager = new TitleManager(this);
@@ -142,6 +142,7 @@ public class MyPanel extends JPanel implements Runnable {
                          }
                     }
                }
+               //Dart
                for (int i = 0; i < projectileList.size(); i++) {
                     if (projectileList.get(i) != null) {
                          if(projectileList.get(i).alive == true){
