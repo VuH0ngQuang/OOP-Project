@@ -28,8 +28,7 @@ public class CollisionChecker {
                 tileNum2 = mp.titleManager.mapTileNum[entityRightCol][entityTopRow];
                 if (mp.titleManager.title[tileNum1].collision || mp.titleManager.title[tileNum2].collision) {
                     entity.collisionOn = true;
-                } else
-                    entity.collisionOn = false;
+                }
                 break;
             case "down":
                 entityBottomRow = (entityBottomWorldY + entity.get_speed()) / (mp.getOriginalTileSize() * 3);
@@ -79,32 +78,44 @@ public class CollisionChecker {
                     case "up":
                         entity.solidArea.y -= entity.get_speed();
                         if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (mp.obj[i].collision == true) {
+                                entity.collisionOn = true;
+                            }
+                            if (player)
+                                index = i;
                         }
                         break;
 
                     case "down":
                         entity.solidArea.y += entity.get_speed();
                         if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (mp.obj[i].collision == true) {
+                                entity.collisionOn = true;
+                            }
+                            if (player)
+                                index = i;
                         }
                         break;
 
                     case "left":
                         entity.solidArea.x -= entity.get_speed();
                         if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (mp.obj[i].collision == true) {
+                                entity.collisionOn = true;
+                            }
+                            if (player)
+                                index = i;
                         }
                         break;
 
                     case "right":
                         entity.solidArea.x += entity.get_speed();
                         if (entity.solidArea.intersects(mp.obj[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (mp.obj[i].collision == true) {
+                                entity.collisionOn = true;
+                            }
+                            if (player)
+                                index = i;
                         }
                         break;
                 }

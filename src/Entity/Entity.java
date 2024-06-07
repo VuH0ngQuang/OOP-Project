@@ -189,8 +189,6 @@ public class Entity {
      public void update() {
           checkCollision();
           setAction();
-          collisionOn = false;
-          mp.collisionChecker.checkEntity(this, mp.enemy);
           boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
           if (this.type == 1 && contactPlayer) {
                if (mp.player.invincible == false) {

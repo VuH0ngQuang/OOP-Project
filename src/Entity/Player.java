@@ -128,7 +128,7 @@ public class Player extends Entity {
                     invincibleCounter = 0;
                }
           }
-          if(life <= 0 ){
+          if (life <= 0) {
                myPanel.gameState = myPanel.gameOverState;
           }
      }
@@ -206,6 +206,7 @@ public class Player extends Entity {
                     case "Hear":
                          myPanel.obj[i] = null;
                          myPanel.ui.showMessage("Healing");
+                         life += 2;
                          break;
                }
           }
