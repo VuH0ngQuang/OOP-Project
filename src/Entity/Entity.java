@@ -9,9 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Entity {
-     public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0;
+     public int worldX, worldY, speed, height, width, spriteNum = 1, spriteCounter = 0,con=1;
      private BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
-     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4;
+     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackDown3, attackDown4, attackLeft1, attackLeft2, attackLeft3, attackLeft4, attackRight1, attackRight2, attackRight3, attackRight4, image;
      private String direction;
      public Rectangle solidArea;
      public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
@@ -41,12 +41,13 @@ public class Entity {
           }
           return image;
      }
-     public Entity(int x, int y, int speed, int height, int width) {
+     public Entity(int x, int y, int speed, int height, int width){
           this.worldX = x;
           this.worldY = y;
           this.speed = speed;
           this.width = width;
           this.height = height;
+          this.mp = mp;
      }
      public void draw(Graphics2D g2){
           BufferedImage image = null;
@@ -182,6 +183,76 @@ public class Entity {
                }
                set_spriteCounter(0);
           }
+     }
+     public void drawOBJ(Graphics2D g2, MyPanel mp){
+          int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
+          int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
+          if (get_spriteNum() == 1||get_spriteNum() == 2) {
+               if (con == 3)
+                    con=1;
+               else
+                    con++;
+          }
+          switch (get_direction()) {
+               case "up":
+                    if (con == 1) {
+                         image = get_up1();
+//                         System.out.println("1");
+                    }
+                    if (con == 2) {
+                         image = get_up2();
+//                         System.out.println("2");
+                    }
+                    if (con == 3) {
+                         image = get_up3();
+//                         System.out.println("3");
+                    }
+                    break;
+
+               case "down":
+                    if (con == 1) {
+                         image = get_down1();
+                    }
+                    if (con == 2) {
+                         image = get_down2();
+                    }
+                    if (con == 3) {
+                         image = get_down3();
+                    }
+                    break;
+
+               case "left":
+                    if (con == 1) {
+                         image = get_left1();
+                    }
+                    if (con == 2) {
+                         image = get_left2();
+                    }
+                    if (con == 3) {
+                         image = get_left3();
+                    }
+                    break;
+
+               case "right":
+                    if (con == 1) {
+                         image = get_right1();
+                    }
+                    if (con == 2) {
+                         image = get_right2();
+                    }
+                    if (con == 3) {
+                         image = get_right3();
+                    }
+                    break;
+
+               // case "stand":
+               // image = get_down1();
+               // break;
+
+               default:
+                    break;
+          }
+          g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
      }
      public MyPanel mp;
      public Entity(MyPanel mp){

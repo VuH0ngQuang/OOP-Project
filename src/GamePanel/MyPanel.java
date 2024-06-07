@@ -181,7 +181,9 @@ public class MyPanel extends JPanel implements Runnable {
                //Draw dart
                for (int i = 0; i < projectileList.size(); i++) {
                     if (projectileList.get(i) != null) {
-                         projectileList.get(i).draw(g2);
+                         if(projectileList.get(i).alive == true){
+                              projectileList.get(i).drawOBJ(g2,this);
+                         }
                     }
                }
                // draw player
