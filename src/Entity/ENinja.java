@@ -55,7 +55,7 @@ public class ENinja extends Entity {
 
         } else {
             // Get a random direction
-            // getRandomDirection();
+            getRandomDirection();
 
             // check if it starts chasing
             checkStartChasingOrNot(mp.player, 5);

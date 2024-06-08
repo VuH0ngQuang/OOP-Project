@@ -247,8 +247,6 @@ public class Entity {
      }
 
      public void checkStopChasingOrNot(Entity target, int distance) {
-          System.out.println(getTileDistance(target));
-          System.out.println(distance * mp.tileSize);
           if (getTileDistance(target) > (distance * mp.tileSize)) {
 
                onPath = false;
@@ -332,7 +330,7 @@ public class Entity {
                     direction = "up";
                } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mp.tileSize) {
                     direction = "down";
-               } else if (enTopY >= nextY && enLeftX < nextX && enRightX < nextX + mp.tileSize) {
+               } else if (enTopY >= nextY && enBottomY < nextY + mp.tileSize) {
                     // left or right
                     if (enLeftX > nextX) {
                          direction = "left";
