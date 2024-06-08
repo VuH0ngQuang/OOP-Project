@@ -46,11 +46,13 @@ public class AssetSetter {
     }
 
     public void setEnemy() {
+        int[] x = new int[]{26, 27, 26, 27, 29, 29, 29, 29, 29, 29, 20, 21, 22, 20, 21, 22, 20, 21, 22, 20, 21, 22, 20, 21, 22, 20, 21, 22, 45, 45, 45, 45, 35, 35, 35, 35, 35, 35};
+        int[] y = new int[]{14, 14, 12, 12, 8, 9, 10, 11, 12, 13, 20, 20, 20, 21, 21, 21, 22, 22, 22, 24, 24, 24, 25, 25, 25, 26, 26, 26, 15, 16, 29, 28, 40, 41, 42, 43, 44, 45};
         // position of the enemy
-        mp.enemy[0] = new ENinja(mp);
-        mp.enemy[0].set_worldX((int) (43 * mp.getOriginalTileSize() * 3));
-        mp.enemy[0].set_worldY((int) (7 * mp.getOriginalTileSize() * 3));
-
-
+        for (int i = 0; i < x.length; i++) {
+            mp.enemy[i] = new ENinja(mp);
+            mp.enemy[i].set_worldX((int) (x[i] * mp.getOriginalTileSize() * 3));
+            mp.enemy[i].set_worldY((int) (y[i] * mp.getOriginalTileSize() * 3));
+        }
     }
 }
