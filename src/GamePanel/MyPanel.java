@@ -59,7 +59,6 @@ public class MyPanel extends JPanel implements Runnable {
           this.addKeyListener(keyMoving);
           this.setFocusable(true);
           this.keyMoving = new KeyMoving(this);
-          this.player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
           this.addKeyListener(keyMoving);
      }
 
@@ -67,6 +66,8 @@ public class MyPanel extends JPanel implements Runnable {
           assetSetter.setObject();
           gameState = titleState;
           assetSetter.setEnemy();
+          player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
+
      }
 
      // WORLD SETTINGS
@@ -143,13 +144,13 @@ public class MyPanel extends JPanel implements Runnable {
                          }
                     }
                }
-               //Dart
+               // Dart
                for (int i = 0; i < projectileList.size(); i++) {
                     if (projectileList.get(i) != null) {
-                         if(projectileList.get(i).alive == true){
+                         if (projectileList.get(i).alive == true) {
                               projectileList.get(i).update();
                          }
-                         if(projectileList.get(i).alive == false){
+                         if (projectileList.get(i).alive == false) {
                               projectileList.remove(i);
                          }
                     }
@@ -180,11 +181,11 @@ public class MyPanel extends JPanel implements Runnable {
                          e.draw(g2);
                     }
                }
-               //Draw dart
+               // Draw dart
                for (int i = 0; i < projectileList.size(); i++) {
                     if (projectileList.get(i) != null) {
-                         if(projectileList.get(i).alive == true){
-                              projectileList.get(i).drawOBJ(g2,this);
+                         if (projectileList.get(i).alive == true) {
+                              projectileList.get(i).drawOBJ(g2, this);
                          }
                     }
                }

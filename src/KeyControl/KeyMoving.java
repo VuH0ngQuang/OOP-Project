@@ -43,14 +43,26 @@ public class KeyMoving implements KeyListener {
                          break;
                     case KeyEvent.VK_ENTER:
                          if (gp.ui.commandNum == 0) {
-                              if (gp.gameState == gp.titleState)
+                              if (gp.gameState == gp.titleState) {
+                                   gp.setupGame();
                                    gp.gameState = gp.playState;
+                              }
 
-                              if (gp.gameState == gp.gameOverState)
+                              if (gp.gameState == gp.gameOverState) {
                                    gp.gameState = gp.titleState;
+                                   setUp(false);
+                                   setDown(false);
+                                   setLeft(false);
+                                   setRight(false);
+                              }
 
-                              if (gp.gameState == gp.gameWinState)
+                              if (gp.gameState == gp.gameWinState) {
                                    gp.gameState = gp.titleState;
+                                   setUp(false);
+                                   setDown(false);
+                                   setLeft(false);
+                                   setRight(false);
+                              }
                               // begin play music
                               // gp.playMusic(0);
                          }
@@ -111,8 +123,8 @@ public class KeyMoving implements KeyListener {
                          break;
 
                     case KeyEvent.VK_SPACE:
-                        setSpace(true);
-                        break;
+                         setSpace(true);
+                         break;
 
                     default:
                          break;
@@ -144,11 +156,11 @@ public class KeyMoving implements KeyListener {
                     case KeyEvent.VK_ENTER:
                          setEnter(false);
                          break;
-               case KeyEvent.VK_SPACE:
-                    setSpace(false);
-                    break;
-               default:
-                    break;
+                    case KeyEvent.VK_SPACE:
+                         setSpace(false);
+                         break;
+                    default:
+                         break;
                }
           }
      }
@@ -194,6 +206,11 @@ public class KeyMoving implements KeyListener {
           return enter;
      }
 
-     public void setSpace(boolean space) {this.space = space;}
-     public boolean getSpace() {return space;}
+     public void setSpace(boolean space) {
+          this.space = space;
+     }
+
+     public boolean getSpace() {
+          return space;
+     }
 }
