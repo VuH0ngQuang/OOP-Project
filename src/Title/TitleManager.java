@@ -14,6 +14,8 @@ public class TitleManager {
     MyPanel mp;
     public Title[] title;
     public int mapTileNum[][];
+    // draw path
+    boolean drawPath = true;
 
     public TitleManager(MyPanel mp) {
         this.mp = mp;
@@ -84,12 +86,27 @@ public class TitleManager {
                     worldX - mp.getOriginalTileSize() * 3 < mp.player.get_worldX() + mp.player.screenX &&
                     worldY + mp.getOriginalTileSize() * 3 > mp.player.get_worldY() - mp.player.screenY &&
                     worldY - mp.getOriginalTileSize() * 3 < mp.player.get_worldY() + mp.player.screenY) {
-                g2.drawImage(title[tileNum].image, screenX, screenY, mp.getOriginalTileSize() * 3,  mp.getOriginalTileSize() * 3, null);
+                g2.drawImage(title[tileNum].image, screenX, screenY, mp.getOriginalTileSize() * 3,
+                        mp.getOriginalTileSize() * 3, null);
             }
             worldCol++;
             if (worldCol == mp.getMaxWorldCol()) {
                 worldCol = 0;
                 worldRow++;
+            }
+        }
+
+        if (drawPath) {
+            g2.setColor(new Color(255, 0, 0, 70));
+
+            for (int i = 0; i < mp.pathFinder.pathList.size(); i++) {
+                int worldX = mp.pathFinder.pathList.get(i).col * mp.tileSize;
+                int worldY = mp.pathFinder.pathList.get(i).row * mp.tileSize;
+                int screenX = worldX - mp.player.worldX + mp.player.screenX;
+                int screenY = worldY - mp.player.worldY + mp.player.screenY;
+
+                g2.fillRect(screenX, screenY, mp.tileSize, mp.tileSize);
+                ;
             }
         }
     }

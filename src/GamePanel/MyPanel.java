@@ -12,6 +12,8 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
+import Ai.PathFinder;
+
 public class MyPanel extends JPanel implements Runnable {
      // specifications
      private final int originalTileSize = 16; // 16
@@ -37,6 +39,7 @@ public class MyPanel extends JPanel implements Runnable {
      public Entity[] enemy = new Entity[10];
      public AssetSetter assetSetter = new AssetSetter(this);
      public UI ui = new UI(this);
+     public PathFinder pathFinder = new PathFinder(this);
 
      // Sound
      Sound sound = new Sound();

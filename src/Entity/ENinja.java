@@ -42,9 +42,9 @@ public class ENinja extends Entity {
         // int xDistance = Math.abs(worldX - mp.player.worldX);
         // int yDistance = Math.abs(worldY - mp.player.worldY);
         // int tileDistance = (xDistance + yDistance) / mp.tileSize;
-        if (onPath == true) {
+        if (onPath) {
             // check if it stops chasing
-            checkStopChasingOrNot(mp.player, 15, 100);
+            checkStopChasingOrNot(mp.player, 15);
             // if (tileDistance > 20) {
             // onPath = false;
             // }
@@ -54,12 +54,13 @@ public class ENinja extends Entity {
             searchPath(getGoalCol(mp.player), getGoalRow(mp.player));
 
         } else {
+            // Get a random direction
+            // getRandomDirection();
+
             // check if it starts chasing
-            checkStartChasingOrNot(mp.player, 5, 100);
+            checkStartChasingOrNot(mp.player, 5);
             // if(onPath == true && tileDistance > 20){
             // onPath = false;
-            // Get a random direction
-            getRandomDirection();
         }
     }
 }

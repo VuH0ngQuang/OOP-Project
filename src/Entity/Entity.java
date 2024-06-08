@@ -17,7 +17,7 @@ public class Entity {
      private String direction;
      public Rectangle solidArea;
      public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
-     public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
+     public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter = 0;
      public boolean collisionOn = false;
      public boolean invincible = false;
      public boolean alive = true;
@@ -238,21 +238,21 @@ public class Entity {
           }
      }
 
-     public void checkStartChasingOrNot(Entity target, int distance, int rate) {
-          if (getTileDistance(target) < distance) {
-               int i = new Random().nextInt(rate);
-               if (i == 0) {
-                    onPath = true;
-               }
+     public void checkStartChasingOrNot(Entity target, int distance) {
+          if (getTileDistance(target) < (distance * mp.tileSize)) {
+
+               onPath = true;
+
           }
      }
 
-     public void checkStopChasingOrNot(Entity target, int distance, int rate) {
-          if (getTileDistance(target) > distance) {
-               int i = new Random().nextInt(rate);
-               if (i == 0) {
-                    onPath = false;
-               }
+     public void checkStopChasingOrNot(Entity target, int distance) {
+          System.out.println(getTileDistance(target));
+          System.out.println(distance * mp.tileSize);
+          if (getTileDistance(target) > (distance * mp.tileSize)) {
+
+               onPath = false;
+
           }
      }
 
@@ -312,6 +312,73 @@ public class Entity {
      // }
 
      public void searchPath(int goalCol, int goalRow) {
+          int startCol = (worldX + solidArea.x) / mp.tileSize;
+          int startRow = (worldY + solidArea.y) / mp.tileSize;
+
+          mp.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+          if (mp.pathFinder.search() == true) {
+               // Next worldX & worldY
+               int nextX = mp.pathFinder.pathList.get(0).col * mp.tileSize;
+               int nextY = mp.pathFinder.pathList.get(0).row * mp.tileSize;
+
+               // Entity's solidArea position
+               int enLeftX = worldX + solidArea.x;
+               int enRightX = worldX + solidArea.x + solidArea.width;
+               int enTopY = worldY + solidArea.y;
+               int enBottomY = worldY + solidArea.y + solidArea.height;
+
+               if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mp.tileSize) {
+                    direction = "up";
+               } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mp.tileSize) {
+                    direction = "down";
+               } else if (enTopY >= nextY && enLeftX < nextX && enRightX < nextX + mp.tileSize) {
+                    // left or right
+                    if (enLeftX > nextX) {
+                         direction = "left";
+                    }
+                    if (enLeftX < nextX) {
+                         direction = "right";
+                    }
+               } else if (enTopY > nextY && enLeftX > nextX) {
+                    // up or left
+                    direction = "up";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "left";
+                    }
+               } else if (enTopY > nextY && enLeftX < nextX) {
+                    // up or right
+                    direction = "up";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "right";
+                    }
+
+               } else if (enTopY < nextY && enLeftX > nextX) {
+                    // down or left
+                    direction = "down";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "left";
+                    }
+               } else if (enTopY < nextY && enLeftX < nextX) {
+                    // down or right
+                    direction = "down";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "right";
+                    }
+
+               }
+
+               // If reaches the goal, stop the search
+               // int nextCol = mp.pathFinder.pathList.get(0).col;
+               // int nextRow = mp.pathFinder.pathList.get(0).row;
+               // if (nextCol == goalCol && nextRow == goalRow) {
+               // onPath = false;
+               // }
+          }
      }
 
      MyPanel mp;
