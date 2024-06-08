@@ -209,7 +209,7 @@ public class CollisionChecker {
 
         return contactPlayer;
     }
-    public void objCollision(ArrayList<Entity> projectileList) {
+    public void tileCollision(ArrayList<Entity> projectileList) {
         for (int i = 0; i < projectileList.size(); i++) {
             if (projectileList.get(i) != null) {
                 int entityLeftWorldX = projectileList.get(i).get_worldX() + projectileList.get(i).solidArea.x;
@@ -254,6 +254,29 @@ public class CollisionChecker {
                             projectileList.get(i).alive = false;
                         }
                         break;
+                }
+            }
+        }
+    }
+    public void objCollision(ArrayList<Entity> entity){
+        for (int j = 0; j < entity.size(); j++) {
+            for(int i = 0; i <  mp.obj.length; i++){
+                if(mp.obj[i] != null){
+                    //get entity's solid area position
+                    entity.get(j).solidArea.x = entity.get(j).get_worldX() + entity.get(j).solidArea.x;
+                    entity.get(j).solidArea.y = entity.get(j).get_worldY() + entity.get(j).solidArea.y;
+
+                    // get the object's solid area position
+                    mp.obj[i].solidArea.x = mp.obj[i].worldX + mp.obj[i].solidArea.x;
+                    mp.obj[i].solidArea.y = mp.obj[i].worldY + mp.obj[i].solidArea.y;
+
+                    if (entity.get(j).solidArea.intersects(mp.obj[i].solidArea)) {
+                        entity.get(j).alive = false;
+                    }
+                    entity.get(j).solidArea.x = entity.get(j).solidAreaDefaultX;
+                    entity.get(j).solidArea.y = entity.get(j).solidAreaDefaultY;
+                    mp.obj[i].solidArea.x = mp.obj[i].solidAreaDefaultX;
+                    mp.obj[i].solidArea.y = mp.obj[i].solidAreaDefaultY;
                 }
             }
         }

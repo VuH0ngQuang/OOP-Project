@@ -75,7 +75,7 @@ public class UI {
             drawPlayerKey();
 
             // Time
-            playTime += (double) 1 / 60;
+            playTime += (double) 1 / gp.get_FPS();
             g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize * 11, gp.tileSize);
 
             // draw message

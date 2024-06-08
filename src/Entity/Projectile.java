@@ -36,6 +36,8 @@ public class Projectile extends Entity {
             }
         }
         //check collision dart with tile
+        mp.collisionChecker.tileCollision(mp.projectileList);
+        //check collision dart with obj
         mp.collisionChecker.objCollision(mp.projectileList);
         if (user != mp.player) {
 
