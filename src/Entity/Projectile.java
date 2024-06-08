@@ -20,11 +20,11 @@ public class Projectile extends Entity {
         this.life = maxLife;
         solidArea = new Rectangle();
         solidArea.x = 12;
-        solidArea.y = 20;
+        solidArea.y = 15;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 24;
-        solidArea.height = 28;
+        solidArea.width = 21;
+        solidArea.height = 21;
     }
 
     public void update() {
@@ -35,8 +35,6 @@ public class Projectile extends Entity {
                 alive = false;
             }
         }
-        //check collision dart with obj
-        mp.collisionChecker.checkObject(this, true);
         //check collision dart with tile
         mp.collisionChecker.objCollision(mp.projectileList);
         if (user != mp.player) {

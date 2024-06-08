@@ -122,8 +122,8 @@ public class Player extends Entity {
                     set_spriteCounter(0);
                }
           }
-          if (keyMoving.getSpace() == true && projectile.alive == false && shotAvailableCounter == 30) {
-               // SET DEFAULT COORDINATES, DIRECTION AND USER
+          if (keyMoving.getSpace() == true && projectile.alive == false && shotAvailableCounter == 120) {
+               // SET DEFAULT COORDINATES, DIRECTION AND USE
                projectile.set(get_worldX(), get_worldY(), get_direction(), true, this);
                // ADD IT TO THE LIST
                myPanel.projectileList.add(projectile);
@@ -138,7 +138,7 @@ public class Player extends Entity {
                     invincibleCounter = 0;
                }
           }
-          if (shotAvailableCounter < 30) {
+          if (shotAvailableCounter < 120) {
                shotAvailableCounter++;
           }
           if (life <= 0) {
@@ -220,6 +220,9 @@ public class Player extends Entity {
                          myPanel.obj[i] = null;
                          myPanel.ui.showMessage("Healing");
                          life += 2;
+                         if (life > maxLife) {
+                              life = maxLife;
+                         }
                          break;
                }
           }

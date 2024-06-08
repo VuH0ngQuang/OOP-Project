@@ -168,6 +168,7 @@ public class UI {
         y = gp.tileSize * 5;
         g2.drawImage(gp.player.get_down1(), x, y, gp.tileSize * 3, gp.tileSize * 3, null);
 
+
         // MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
         text = "NEW GAME";

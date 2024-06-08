@@ -37,6 +37,9 @@ public class TitleManager {
 
             title[2] = new Title();
             title[2].image = ImageIO.read(getClass().getResourceAsStream("/Title/floor_2.png"));
+
+            title[9] = new Title();
+            title[9].image = ImageIO.read(getClass().getResourceAsStream("/Title/wall.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

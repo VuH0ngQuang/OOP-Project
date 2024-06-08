@@ -196,6 +196,10 @@ public class Entity {
           checkCollision();
           setAction();
           boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
+         //check collision dart with obj
+         if (projectile != null){
+             mp.collisionChecker.checkObject(projectile, false);
+         }
           if (this.type == 1 && contactPlayer) {
                if (mp.player.invincible == false) {
                     mp.player.life--;

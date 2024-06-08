@@ -8,7 +8,7 @@ public class OBJ_Dart extends Projectile {
         super(mp);
         this.mp = mp;
         name = "Dart";
-        speed = 10;
+        speed = 20;
         maxLife = 80;
         life = maxLife;
         attack = 2;
