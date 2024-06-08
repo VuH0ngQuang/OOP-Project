@@ -127,7 +127,8 @@ public class Player extends Entity {
                projectile.set(get_worldX(), get_worldY(), get_direction(), true, this);
                // ADD IT TO THE LIST
                myPanel.projectileList.add(projectile);
-
+               // play SE
+               // myPanel.playSE(1);
                shotAvailableCounter = 0;
           }
           // this shit needs to be outside of key if statement !
@@ -213,6 +214,15 @@ public class Player extends Entity {
                          break;
 
                     case "Chest":
+                         // stop all music
+                         // myPanel.stopMusic();
+                         // wining sound
+                         // myPanel.playMusic(1);
+                         keyMoving.setSpace(false);
+                         keyMoving.setUp(false);
+                         keyMoving.setDown(false);
+                         keyMoving.setLeft(false);
+                         keyMoving.setRight(false);
                          myPanel.gameState = myPanel.gameWinState;
                          break;
 

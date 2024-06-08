@@ -71,6 +71,8 @@ public class MyPanel extends JPanel implements Runnable {
           gameState = titleState;
           assetSetter.setEnemy();
           player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
+          // play background music
+          // playMusic(1);
 
      }
 
