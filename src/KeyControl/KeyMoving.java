@@ -44,25 +44,26 @@ public class KeyMoving implements KeyListener {
                     case KeyEvent.VK_ENTER:
                          if (gp.ui.commandNum == 0) {
                               if (gp.gameState == gp.titleState) {
-                                   gp.setupGame();
                                    gp.gameState = gp.playState;
                               }
 
-                              if (gp.gameState == gp.gameOverState) {
+                              if (gp.gameState == gp.gameOverState || gp.gameState == gp.gameWinState) {
                                    gp.gameState = gp.titleState;
+                                   gp.setupGame();
                                    setUp(false);
                                    setDown(false);
                                    setLeft(false);
                                    setRight(false);
                               }
 
-                              if (gp.gameState == gp.gameWinState) {
-                                   gp.gameState = gp.titleState;
-                                   setUp(false);
-                                   setDown(false);
-                                   setLeft(false);
-                                   setRight(false);
-                              }
+                              // if (gp.gameState == gp.gameWinState) {
+                              // gp.gameState = gp.titleState;
+                              // gp.setupGame();
+                              // setUp(false);
+                              // setDown(false);
+                              // setLeft(false);
+                              // setRight(false);
+                              // }
                               // begin play music
                               // gp.playMusic(0);
                          }
@@ -100,7 +101,7 @@ public class KeyMoving implements KeyListener {
           // }
           // }
 
-          if (gp.gameState == gp.playState) {
+          else if (gp.gameState == gp.playState) {
                switch (code) {
                     case KeyEvent.VK_W:
                          setUp(true);

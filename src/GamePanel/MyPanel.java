@@ -60,8 +60,7 @@ public class MyPanel extends JPanel implements Runnable {
           this.setFocusable(true);
           this.keyMoving = new KeyMoving(this);
           this.addKeyListener(keyMoving);
-
-          player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
+          setupGame();
      }
 
      public void setupGame() {
