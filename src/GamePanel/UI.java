@@ -59,72 +59,47 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-        if (gameFinished) {
 
-            g2.setFont(arial_24);
-            g2.setColor(Color.white);
+        this.g2 = g2;
+        g2.setFont(maruMonica);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.white);
 
-            String text;
-            int textLength;
-            int x, y;
+        // TITLE STATE
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
+        // PLAY STATE
+        if (gp.gameState == gp.playState) {
+            drawPlayerLife();
+            drawPlayerKey();
 
-            text = "You found the treasure";
-            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getScreenWidth() / 2 - textLength / 2;
-            y = gp.getScreenHeight() / 2 - (gp.tileSize * 3);
-            g2.drawString(text, x, y);
+            // Time
+            playTime += (double) 1 / 60;
+            g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize * 11, gp.tileSize);
 
-            text = "You time is :" + dFormat.format(playTime);
-            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getScreenWidth() / 2 - textLength / 2;
-            y = gp.getScreenHeight() / 2 + (gp.tileSize * 4);
-            g2.drawString(text, x, y);
+            // draw message
+            if (messageOn) {
+                g2.drawString(message, 10, gp.tileSize * 4);
+                messageCounter++;
 
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, gp.tileSize * 3));
-            g2.setColor(Color.yellow);
-            text = "Congratulations";
-            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-            x = gp.getScreenWidth() / 2 - textLength / 2;
-            y = gp.getScreenHeight() / 2 + (gp.tileSize * 2);
-            g2.drawString(text, x, y);
-
-            gp.gameThread = null;
-
-        } else {
-            this.g2 = g2;
-            g2.setFont(maruMonica);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(Color.white);
-
-            // TITLE STATE
-            if (gp.gameState == gp.titleState) {
-                drawTitleScreen();
-            }
-            // PLAY STATE
-            if (gp.gameState == gp.playState) {
-                drawPlayerLife();
-                drawPlayerKey();
-
-                // Time
-                playTime += (double) 1 / 60;
-                g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize * 11, gp.tileSize);
-
-                // draw message
-                if (messageOn) {
-                    g2.drawString(message, 10, gp.tileSize * 4);
-                    messageCounter++;
-
-                    if (messageCounter > 120) {
-                        messageCounter = 0;
-                        messageOn = false;
-                    }
+                if (messageCounter > 120) {
+                    messageCounter = 0;
+                    messageOn = false;
                 }
             }
-            // GAME OVER STATE
-            if(gp.gameState == gp.gameOverState){
-                drawGameOverScreen();
-            }
         }
+
+        // game win
+        if (gp.gameState == gp.gameWinState) {
+            drawGameWinScreen();
+        }
+
+        // GAME OVER STATE
+        if (gp.gameState == gp.gameOverState) {
+            drawGameOverScreen();
+        }
+
     }
 
     public void drawPlayerLife() {
@@ -234,7 +209,7 @@ public class UI {
         messageOn = true;
     }
 
-    public void drawGameOverScreen(){
+    public void drawGameOverScreen() {
         g2.setColor(new Color(107, 0, 119, 231));
         g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
         int x;
@@ -242,31 +217,78 @@ public class UI {
         String text;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
         text = "You Die, Loser <3";
-        //Shadow
+        // Shadow
         g2.setColor(Color.black);
         x = getXforCenteredText(text);
         y = gp.tileSize * 4;
         g2.drawString(text, x, y);
-        //Main
+        // Main
         g2.setColor(Color.white);
-        g2.drawString(text, x-4, y-4);
+        g2.drawString(text, x - 4, y - 4);
 
-        //Retry
+        // Retry
         g2.setFont(g2.getFont().deriveFont(50f));
         text = "BACK TO MENU ♡";
         x = getXforCenteredText(text);
         y += gp.tileSize * 4;
         g2.drawString(text, x, y);
-        if(commandNum == 0){
-            g2.drawString("❤", x-40,y);
+        if (commandNum == 0) {
+            g2.drawString("❤", x - 40, y);
         }
-        //Back to title screen
+        // Back to title screen
         text = "Quit";
         x = getXforCenteredText(text);
         y += 55;
         g2.drawString(text, x, y);
-        if(commandNum == 1){
-            g2.drawString("❤", x-40,y);
+        if (commandNum == 1) {
+            g2.drawString("❤", x - 40, y);
+        }
+    }
+
+    public void drawGameWinScreen() {
+
+        g2.setFont(maruMonica);
+        g2.setColor(Color.white);
+
+        String text;
+        int textLength;
+        int x, y;
+
+        text = "You found the treasure";
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gp.getScreenWidth() / 2 - textLength / 2;
+        y = gp.getScreenHeight() / 2 - (gp.tileSize * 3);
+        g2.drawString(text, x, y);
+
+        text = "You time is :" + dFormat.format(playTime);
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gp.getScreenWidth() / 2 - textLength / 2;
+        y = gp.getScreenHeight() / 2 + (gp.tileSize * 4);
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, gp.tileSize * 3));
+        g2.setColor(Color.yellow);
+        text = "Congratulations";
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gp.getScreenWidth() / 2 - textLength / 2;
+        y = gp.getScreenHeight() / 2 + (gp.tileSize * 2);
+        g2.drawString(text, x, y);
+
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "BACK TO MENU ♡";
+        x = getXforCenteredText(text);
+        y += gp.tileSize * 2;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString("❤", x - 40, y);
+        }
+        // Back to title screen
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y += 55;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString("❤", x - 40, y);
         }
     }
 

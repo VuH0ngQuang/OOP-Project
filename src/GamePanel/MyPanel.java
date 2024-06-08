@@ -48,6 +48,7 @@ public class MyPanel extends JPanel implements Runnable {
      public final int titleState = 0;
      public final int playState = 1;
      public final int gameOverState = 2;
+     public final int gameWinState = 3;
 
      // Panel
      public MyPanel() {
@@ -58,7 +59,7 @@ public class MyPanel extends JPanel implements Runnable {
           this.addKeyListener(keyMoving);
           this.setFocusable(true);
           this.keyMoving = new KeyMoving(this);
-          this.player = new Player(this, keyMoving, 2, 1, 4, 3, 3);
+          this.player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
           this.addKeyListener(keyMoving);
      }
 
@@ -124,9 +125,9 @@ public class MyPanel extends JPanel implements Runnable {
      // update before paint
      public void update() {
           if (gameState == playState) {
-               //PLAYER
+               // PLAYER
                player.update();
-               //ENEMY
+               // ENEMY
                for (int i = 0; i < enemy.length; i++) {
                     if (enemy[i] != null) {
                          enemy[i].update();
@@ -134,10 +135,10 @@ public class MyPanel extends JPanel implements Runnable {
                }
                for (int i = 0; i < enemy.length; i++) {
                     if (enemy[i] != null) {
-                         if(enemy[i].alive == true && enemy[i].dying == false){
+                         if (enemy[i].alive == true && enemy[i].dying == false) {
                               enemy[i].update();
                          }
-                         if(enemy[i].alive == false){
+                         if (enemy[i].alive == false) {
                               enemy[i] = null;
                          }
                     }

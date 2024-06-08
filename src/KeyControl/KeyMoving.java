@@ -22,119 +22,134 @@ public class KeyMoving implements KeyListener {
 
      @Override
      public void keyPressed(KeyEvent e) {
-          if (gp == null)
-               return;
-
+          // if (gp == null)
+          // return;
           int code = e.getKeyCode();
-          // TITLE STATE
-          if (gp.gameState == gp.titleState) {
-               if (code == KeyEvent.VK_W) {
-                    gp.ui.commandNum--;
-                    if (gp.ui.commandNum < 0) {
-                         gp.ui.commandNum = 1;
-                    }
-               }
-               if (code == KeyEvent.VK_S) {
-                    gp.ui.commandNum++;
-                    if (gp.ui.commandNum > 1) {
-                         gp.ui.commandNum = 0;
-                    }
-               }
-               if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0) {
-                         gp.gameState = gp.playState;
 
-                         // begin play music
-                         // gp.playMusic(0);
-                    }
-                    if (gp.ui.commandNum == 1) {
-                         System.exit(0);
-                    }
-               }
-          }
           // TITLE STATE
-          if (gp.gameState == gp.gameOverState) {
-               if (code == KeyEvent.VK_W) {
-                    gp.ui.commandNum--;
-                    if (gp.ui.commandNum < 0) {
-                         gp.ui.commandNum = 1;
-                    }
-               }
-               if (code == KeyEvent.VK_S) {
-                    gp.ui.commandNum++;
-                    if (gp.ui.commandNum > 1) {
-                         gp.ui.commandNum = 0;
-                    }
-               }
-               if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0) {
-                         gp.gameState = gp.titleState;
-                    }
-                    if (gp.ui.commandNum == 1) {
-                         System.exit(0);
-                    }
+          if (gp.gameState == gp.titleState || gp.gameState == gp.gameOverState || gp.gameState == gp.gameWinState) {
+               switch (code) {
+                    case KeyEvent.VK_W:
+                         gp.ui.commandNum--;
+                         if (gp.ui.commandNum < 0) {
+                              gp.ui.commandNum = 1;
+                         }
+                         break;
+                    case KeyEvent.VK_S:
+                         gp.ui.commandNum++;
+                         if (gp.ui.commandNum > 1) {
+                              gp.ui.commandNum = 0;
+                         }
+                         break;
+                    case KeyEvent.VK_ENTER:
+                         if (gp.ui.commandNum == 0) {
+                              if (gp.gameState == gp.titleState)
+                                   gp.gameState = gp.playState;
+
+                              if (gp.gameState == gp.gameOverState)
+                                   gp.gameState = gp.titleState;
+
+                              if (gp.gameState == gp.gameWinState)
+                                   gp.gameState = gp.titleState;
+                              // begin play music
+                              // gp.playMusic(0);
+                         }
+                         if (gp.ui.commandNum == 1) {
+                              System.exit(0);
+                         }
+                         break;
+                    default:
+                         break;
                }
           }
 
+          // TITLE STATE
+          // else if (gp.gameState == gp.gameOverState) {
+          // if (code == KeyEvent.VK_W) {
+          // gp.ui.commandNum--;
+          // if (gp.ui.commandNum < 0) {
+          // gp.ui.commandNum = 1;
+          // }
+          // }
+          // if (code == KeyEvent.VK_S) {
+          // gp.ui.commandNum++;
+          // if (gp.ui.commandNum > 1) {
+          // gp.ui.commandNum = 0;
+          // }
+          // }
+          // if (code == KeyEvent.VK_ENTER) {
+          // if (gp.ui.commandNum == 0) {
+          // gp.gameState = gp.titleState;
+          // // gp.player.life = 6;
+          // }
+          // if (gp.ui.commandNum == 1) {
+          // System.exit(0);
+          // }
+          // }
+          // }
 
-          switch (e.getKeyCode()) {
-               case KeyEvent.VK_W:
-                    setUp(true);
-                    break;
+          if (gp.gameState == gp.playState) {
+               switch (code) {
+                    case KeyEvent.VK_W:
+                         setUp(true);
+                         break;
 
-               case KeyEvent.VK_S:
-                    setDown(true);
-                    break;
+                    case KeyEvent.VK_S:
+                         setDown(true);
+                         break;
 
-               case KeyEvent.VK_A:
-                    setLeft(true);
-                    break;
+                    case KeyEvent.VK_A:
+                         setLeft(true);
+                         break;
 
-               case KeyEvent.VK_D:
-                    setRight(true);
-                    break;
+                    case KeyEvent.VK_D:
+                         setRight(true);
+                         break;
 
-               case KeyEvent.VK_ENTER:
-                    setEnter(true);
-                    break;
+                    case KeyEvent.VK_ENTER:
+                         setEnter(true);
+                         break;
 
-               case KeyEvent.VK_SPACE:
-                    setSpace(true);
-                    break;
+                    case KeyEvent.VK_SPACE:
+                        setSpace(true);
+                        break;
 
-               default:
-                    break;
+                    default:
+                         break;
+               }
           }
      }
 
      @Override
      public void keyReleased(KeyEvent e) {
-          switch (e.getKeyCode()) {
-               case KeyEvent.VK_W:
-                    setUp(false);
-                    break;
+          int code = e.getKeyCode();
+          if (gp.gameState == gp.playState) {
+               switch (code) {
+                    case KeyEvent.VK_W:
+                         setUp(false);
+                         break;
 
-               case KeyEvent.VK_S:
-                    setDown(false);
-                    break;
+                    case KeyEvent.VK_S:
+                         setDown(false);
+                         break;
 
-               case KeyEvent.VK_A:
-                    setLeft(false);
-                    break;
+                    case KeyEvent.VK_A:
+                         setLeft(false);
+                         break;
 
-               case KeyEvent.VK_D:
-                    setRight(false);
-                    break;
+                    case KeyEvent.VK_D:
+                         setRight(false);
+                         break;
 
-               case KeyEvent.VK_ENTER:
-                    setEnter(false);
-                    break;
-
+                    case KeyEvent.VK_ENTER:
+                         setEnter(false);
+                         break;
                case KeyEvent.VK_SPACE:
                     setSpace(false);
                     break;
                default:
                     break;
+               }
           }
      }
 
