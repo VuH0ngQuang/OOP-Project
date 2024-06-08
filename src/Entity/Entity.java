@@ -17,7 +17,7 @@ public class Entity {
      private String direction;
      public Rectangle solidArea;
      public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
-     public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter;
+     public int solidAreaDefaultX, solidAreaDefaultY, actionLockCounter = 0;
      public boolean collisionOn = false;
      public boolean invincible = false;
      public boolean alive = true;
@@ -248,92 +248,91 @@ public class Entity {
           }
      }
 
-     public void drawOBJ(Graphics2D g2, MyPanel mp) {
-          int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
-          int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
-          if (get_spriteNum() == 1 || get_spriteNum() == 2) {
-               if (con == 3)
-                    con = 1;
-               else
-                    con++;
+     public void checkStartChasingOrNot(Entity target, int distance) {
+          if (getTileDistance(target) < (distance * mp.tileSize)) {
+
+               onPath = true;
+
           }
-          switch (get_direction()) {
-               case "up":
-                    if (con == 1) {
-                         image = get_up1();
-                         // System.out.println("1");
-                    }
-                    if (con == 2) {
-                         image = get_up2();
-                         // System.out.println("2");
-                    }
-                    if (con == 3) {
-                         image = get_up3();
-                         // System.out.println("3");
-                    }
-                    break;
-
-               case "down":
-                    if (con == 1) {
-                         image = get_down1();
-                    }
-                    if (con == 2) {
-                         image = get_down2();
-                    }
-                    if (con == 3) {
-                         image = get_down3();
-                    }
-                    break;
-
-               case "left":
-                    if (con == 1) {
-                         image = get_left1();
-                    }
-                    if (con == 2) {
-                         image = get_left2();
-                    }
-                    if (con == 3) {
-                         image = get_left3();
-                    }
-                    break;
-
-               case "right":
-                    if (con == 1) {
-                         image = get_right1();
-                    }
-                    if (con == 2) {
-                         image = get_right2();
-                    }
-                    if (con == 3) {
-                         image = get_right3();
-                    }
-                    break;
-
-               // case "stand":
-               // image = get_down1();
-               // break;
-
-               default:
-                    break;
-          }
-          g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3, mp.getOriginalTileSize() * 3, null);
      }
-    public void checkStartChasingOrNot(Entity target, int distance, int rate) {
-        if (getTileDistance(target) < distance) {
-            int i = new Random().nextInt(rate);
-            if (i == 0) {
-                onPath = true;
-            }
-        }
-    }
 
-    public void checkStopChasingOrNot(Entity target, int distance, int rate) {
-        if (getTileDistance(target) > distance) {
-            int i = new Random().nextInt(rate);
-            if (i == 0) {
-                onPath = false;
-            }
+     public void checkStopChasingOrNot(Entity target, int distance) {
+          if (getTileDistance(target) > (distance * mp.tileSize)) {
+
+               onPath = false;
+
+          }
+     }
+
+    public void drawOBJ(Graphics2D g2, MyPanel mp) {
+        int screenX = worldX - mp.player.get_worldX() + mp.player.getScreenX();
+        int screenY = worldY - mp.player.get_worldY() + mp.player.getScreenY();
+        if (get_spriteNum() == 1 || get_spriteNum() == 2) {
+            if (con == 3)
+                con = 1;
+            else
+                con++;
         }
+        switch (get_direction()) {
+            case "up":
+                if (con == 1) {
+                    image = get_up1();
+                    // System.out.println("1");
+                }
+                if (con == 2) {
+                    image = get_up2();
+                    // System.out.println("2");
+                }
+                if (con == 3) {
+                    image = get_up3();
+                    // System.out.println("3");
+                }
+                break;
+
+            case "down":
+                if (con == 1) {
+                    image = get_down1();
+                }
+                if (con == 2) {
+                    image = get_down2();
+                }
+                if (con == 3) {
+                    image = get_down3();
+                }
+                break;
+
+            case "left":
+                if (con == 1) {
+                    image = get_left1();
+                }
+                if (con == 2) {
+                    image = get_left2();
+                }
+                if (con == 3) {
+                    image = get_left3();
+                }
+                break;
+
+            case "right":
+                if (con == 1) {
+                    image = get_right1();
+                }
+                if (con == 2) {
+                    image = get_right2();
+                }
+                if (con == 3) {
+                    image = get_right3();
+                }
+                break;
+
+            // case "stand":
+            // image = get_down1();
+            // break;
+
+            default:
+                break;
+        }
+        g2.drawImage(image, screenX, screenY, mp.getOriginalTileSize() * 3, mp.getOriginalTileSize() * 3, null);
     }
 
     public void getRandomDirection() {
@@ -391,8 +390,75 @@ public class Entity {
     // }
     // }
 
-    public void searchPath(int goalCol, int goalRow) {
-    }
+     public void searchPath(int goalCol, int goalRow) {
+          int startCol = (worldX + solidArea.x) / mp.tileSize;
+          int startRow = (worldY + solidArea.y) / mp.tileSize;
+
+          mp.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+          if (mp.pathFinder.search() == true) {
+               // Next worldX & worldY
+               int nextX = mp.pathFinder.pathList.get(0).col * mp.tileSize;
+               int nextY = mp.pathFinder.pathList.get(0).row * mp.tileSize;
+
+               // Entity's solidArea position
+               int enLeftX = worldX + solidArea.x;
+               int enRightX = worldX + solidArea.x + solidArea.width;
+               int enTopY = worldY + solidArea.y;
+               int enBottomY = worldY + solidArea.y + solidArea.height;
+
+               if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mp.tileSize) {
+                    direction = "up";
+               } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mp.tileSize) {
+                    direction = "down";
+               } else if (enTopY >= nextY && enBottomY < nextY + mp.tileSize) {
+                    // left or right
+                    if (enLeftX > nextX) {
+                         direction = "left";
+                    }
+                    if (enLeftX < nextX) {
+                         direction = "right";
+                    }
+               } else if (enTopY > nextY && enLeftX > nextX) {
+                    // up or left
+                    direction = "up";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "left";
+                    }
+               } else if (enTopY > nextY && enLeftX < nextX) {
+                    // up or right
+                    direction = "up";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "right";
+                    }
+
+               } else if (enTopY < nextY && enLeftX > nextX) {
+                    // down or left
+                    direction = "down";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "left";
+                    }
+               } else if (enTopY < nextY && enLeftX < nextX) {
+                    // down or right
+                    direction = "down";
+                    checkCollision();
+                    if (collisionOn == true) {
+                         direction = "right";
+                    }
+
+               }
+
+               // If reaches the goal, stop the search
+               // int nextCol = mp.pathFinder.pathList.get(0).col;
+               // int nextRow = mp.pathFinder.pathList.get(0).row;
+               // if (nextCol == goalCol && nextRow == goalRow) {
+               // onPath = false;
+               // }
+          }
+     }
 
      public MyPanel mp;
 
