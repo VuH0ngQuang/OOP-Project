@@ -217,7 +217,7 @@ public class Player extends Entity {
                          // stop all music
                          // myPanel.stopMusic();
                          // wining sound
-                         // myPanel.playMusic(1);
+                          myPanel.playMusic(2);
                          keyMoving.setSpace(false);
                          keyMoving.setUp(false);
                          keyMoving.setDown(false);
