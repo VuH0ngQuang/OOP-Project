@@ -2,7 +2,6 @@ package Entity;
 
 import GamePanel.*;
 import KeyControl.*;
-import Object.*;
 import Sound.Sound;
 
 import java.awt.*;
