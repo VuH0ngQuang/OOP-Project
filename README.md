@@ -29,7 +29,7 @@ javac *.java
 java Main
 ```
 II. Using jar file
- 1. Just open folder **out/artifacts/OOP_Project_jar** and run the jar file.
+ 1. Just run the **NinjaDie.jar** file in the main folder.
 ## Language
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
