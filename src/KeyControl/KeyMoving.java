@@ -48,10 +48,15 @@ public class KeyMoving implements KeyListener {
                               }
 
                               if (gp.gameState == gp.gameOverState || gp.gameState == gp.gameWinState) {
-                                   // stop all music
-                                   // gp.stopMusic();
-                                   gp.gameState = gp.titleState;
+                                   // stop wining or not music
+                                   gp.stopMusic();
+
+                                   setUp(false);
+                                   setDown(false);
+                                   setLeft(false);
+                                   setRight(false);
                                    gp.setupGame();
+                                   gp.gameState = gp.titleState;
                               }
 
                               // if (gp.gameState == gp.gameWinState) {

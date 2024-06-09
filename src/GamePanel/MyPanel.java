@@ -72,7 +72,7 @@ public class MyPanel extends JPanel implements Runnable {
           assetSetter.setEnemy();
           player = new Player(this, keyMoving, 41, 7, 4, 3, 3);
           // play background music
-           playMusic(0);
+          playMusic(0);
 
      }
 

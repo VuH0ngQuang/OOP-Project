@@ -11,14 +11,13 @@ public class Sound {
      URL soundURL[] = new URL[30];
 
      public Sound() {
-          System.out.println("Sound constructor is running.");
           soundURL[0] = getClass().getResource("/Sound/sound_background.wav");
           soundURL[1] = getClass().getResource("/Sound/sound_bangbang.wav");
           soundURL[2] = getClass().getResource("/Sound/sound_wining.wav");
      }
 
      public void setFile(int i) {
-          System.out.println("setFile method is running with index: " + i);
+          // System.out.println("setFile method is running with index: " + i);
           try {
                AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
                clip = AudioSystem.getClip();

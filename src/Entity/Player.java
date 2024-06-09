@@ -3,6 +3,7 @@ package Entity;
 import GamePanel.*;
 import KeyControl.*;
 import Object.*;
+import Sound.Sound;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,9 @@ public class Player extends Entity {
      private boolean attacking = false;
      public final int screenX;
      public final int screenY;
+
+     // sound SE
+     Sound soundE = new Sound();
 
      public int hasKey = 0;
 
@@ -44,6 +48,7 @@ public class Player extends Entity {
           // PLAYER STATUS
           maxLife = 6;
           life = maxLife;
+
      }
 
      // update value
@@ -128,7 +133,9 @@ public class Player extends Entity {
                // ADD IT TO THE LIST
                myPanel.projectileList.add(projectile);
                // play SE
-               // myPanel.playSE(1);
+               soundE.setFile(1);
+               soundE.play();
+
                shotAvailableCounter = 0;
           }
           // this shit needs to be outside of key if statement !
@@ -143,6 +150,10 @@ public class Player extends Entity {
                shotAvailableCounter++;
           }
           if (life <= 0) {
+               // stop background music
+               myPanel.stopMusic();
+
+               keyMoving.setSpace(false);
                myPanel.gameState = myPanel.gameOverState;
           }
      }
@@ -214,15 +225,13 @@ public class Player extends Entity {
                          break;
 
                     case "Chest":
-                         // stop all music
-                         // myPanel.stopMusic();
+                         // stop background music
+                         myPanel.stopMusic();
+
                          // wining sound
-                          myPanel.playMusic(2);
+                         myPanel.playMusic(2);
+
                          keyMoving.setSpace(false);
-                         keyMoving.setUp(false);
-                         keyMoving.setDown(false);
-                         keyMoving.setLeft(false);
-                         keyMoving.setRight(false);
                          myPanel.gameState = myPanel.gameWinState;
                          break;
 
