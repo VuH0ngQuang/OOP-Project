@@ -15,7 +15,7 @@ public class TitleManager {
     public Title[] title;
     public int mapTileNum[][];
     // draw path
-    boolean drawPath = true;
+    boolean drawPath = false;
 
     public TitleManager(MyPanel mp) {
         this.mp = mp;
