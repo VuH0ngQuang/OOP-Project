@@ -11,7 +11,7 @@ public class ENinja extends Entity {
         super(mp);
         type = 1;
         name = "ENinja";
-        set_speed(1);
+        set_speed(3);
         maxLife = 1;
         life = maxLife;
         solidArea = new Rectangle();
@@ -43,16 +43,33 @@ public class ENinja extends Entity {
         // int yDistance = Math.abs(worldY - mp.player.worldY);
         // int tileDistance = (xDistance + yDistance) / mp.tileSize;
         if (onPath) {
-            // check if it stops chasing
-            checkStopChasingOrNot(mp.player, 15);
-            // if (tileDistance > 20) {
-            // onPath = false;
-            // }
-            // search the direction to go
-            // int goalCol = (mp.player.worldX + mp.player.solidArea.x)/mp.tileSize;
-            // int goalRow = (mp.player.worldY + mp.player.solidArea.y)/mp.tileSize;
-            searchPath(getGoalCol(mp.player), getGoalRow(mp.player));
-
+            if (collisionOn && !contactPlayer) {
+                switch (get_direction()){
+                    case "up":
+                        set_direction("down");
+                        break;
+                    case "down":
+                        set_direction("up");
+                        break;
+                    case "left":
+                        set_direction("right");
+                        break;
+                    case "right":
+                        set_direction("left");
+                        break;
+                }
+                collisionOn = false;
+            } else {
+                // check if it stops chasing
+                checkStopChasingOrNot(mp.player, 15);
+                // if (tileDistance > 20) {
+                // onPath = false;
+                // }
+                // search the direction to go
+                // int goalCol = (mp.player.worldX + mp.player.solidArea.x)/mp.tileSize;
+                // int goalRow = (mp.player.worldY + mp.player.solidArea.y)/mp.tileSize;
+                searchPath(getGoalCol(mp.player), getGoalRow(mp.player));
+            }
         } else {
             // Get a random direction
             getRandomDirection();

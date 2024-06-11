@@ -33,11 +33,11 @@ public class Player extends Entity {
           screenY = myPanel.getScreenHeight() / 2 - (myPanel.getOriginalTileSize() * 3 / 2);
           solidArea = new Rectangle();
           solidArea.x = 12;
-          solidArea.y = 20;
+          solidArea.y = 14;
           solidAreaDefaultX = solidArea.x;
           solidAreaDefaultY = solidArea.y;
           solidArea.width = 24;
-          solidArea.height = 28;
+          solidArea.height = 34;
           attackArea.width = 36;
           attackArea.height = 36;
           projectile = new OBJ_Dart(myPanel);

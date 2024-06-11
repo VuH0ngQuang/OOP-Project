@@ -23,6 +23,7 @@ public class Entity {
      public boolean alive = true;
      public boolean dying = false;
      boolean attacking = false;
+     public boolean contactPlayer = false;
      public int invincibleCounter = 0;
      int dyingCounter = 0;
      public int attack = 0;
@@ -85,7 +86,7 @@ public class Entity {
           mp.collisionChecker.checkTile(this);
           mp.collisionChecker.checkObject(this, false);
           mp.collisionChecker.checkEntity(this, mp.enemy);
-          boolean contactPlayer = mp.collisionChecker.checkPlayer(this);
+          contactPlayer = mp.collisionChecker.checkPlayer(this);
      }
 
      public void draw(Graphics2D g2) {

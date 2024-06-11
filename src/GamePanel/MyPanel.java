@@ -137,11 +137,6 @@ public class MyPanel extends JPanel implements Runnable {
                // ENEMY
                for (int i = 0; i < enemy.length; i++) {
                     if (enemy[i] != null) {
-                         enemy[i].update();
-                    }
-               }
-               for (int i = 0; i < enemy.length; i++) {
-                    if (enemy[i] != null) {
                          if (enemy[i].alive == true && enemy[i].dying == false) {
                               enemy[i].update();
                          }
