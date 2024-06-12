@@ -26,7 +26,7 @@ public class UI {
     public boolean gameFinished = false;
 
     // count time
-    double playTime;
+    public double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     public UI(MyPanel gp) {
@@ -211,6 +211,7 @@ public class UI {
     }
 
     public void drawGameOverScreen() {
+
         g2.setColor(new Color(107, 0, 119, 231));
         g2.fillRect(0, 0, gp.getScreenWidth(), gp.getScreenHeight());
         int x;
@@ -247,7 +248,8 @@ public class UI {
     }
 
     public void drawGameWinScreen() {
-
+        g2.setColor(new Color(215, 0, 255, 159));
+        g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
@@ -255,38 +257,43 @@ public class UI {
         int textLength;
         int x, y;
 
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, gp.tileSize * 3));
+        g2.setColor(new Color(0, 227, 255, 255));
+
         text = "You found the treasure";
         textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2 - (gp.tileSize * 3);
+        y = gp.getScreenHeight() / 2 - (gp.tileSize * 4);
         g2.drawString(text, x, y);
 
+        g2.setFont(g2.getFont().deriveFont(50f));
         text = "You time is :" + dFormat.format(playTime);
         textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2 + (gp.tileSize * 4);
+        y = gp.getScreenHeight() / 2 + (gp.tileSize * 0);
         g2.drawString(text, x, y);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, gp.tileSize * 3));
-        g2.setColor(Color.yellow);
+        g2.setFont(g2.getFont().deriveFont(100f));
         text = "Congratulations";
         textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2 + (gp.tileSize * 2);
+        y = gp.getScreenHeight() / 2 - (gp.tileSize * 2);
         g2.drawString(text, x, y);
 
         g2.setFont(g2.getFont().deriveFont(50f));
         text = "BACK TO MENU ♡";
-        x = getXforCenteredText(text);
-        y += gp.tileSize * 2;
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gp.getScreenWidth() / 2 - textLength / 2;
+        y = gp.getScreenHeight() / 2 + (gp.tileSize * 2);
         g2.drawString(text, x, y);
         if (commandNum == 0) {
             g2.drawString("❤", x - 40, y);
         }
         // Back to title screen
         text = "Quit";
-        x = getXforCenteredText(text);
-        y += 55;
+        textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        x = gp.getScreenWidth() / 2 - textLength / 2;
+        y = gp.getScreenHeight() / 2 + (gp.tileSize * 3);
         g2.drawString(text, x, y);
         if (commandNum == 1) {
             g2.drawString("❤", x - 40, y);

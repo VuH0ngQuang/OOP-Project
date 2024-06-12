@@ -11,31 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="70c77158-4e5e-4f22-91d5-35b00ed1e813" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NinjaDie.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ai/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ai/PathFinder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AssetSetter/AssetSetter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CollisionChecker/CollisionChecker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ENinja.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Entity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/OBJ_Dart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Projectile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel/MyFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel/MyPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ENinja.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ENinja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GamePanel/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel/MyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GamePanel/UI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/KeyControl/KeyMoving.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Chest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Door.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Healing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Heart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Key.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object/SuperObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sound/Sound.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Title/Title.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Title/TitleManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UtilityTool/UtilityTool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GamePanel/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GamePanel/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,26 +59,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/spoti/Desktop/OOP-Project/Resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main (1).executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/spoti/Desktop/OOP-Project/Resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\OOP-Project\Resources\Object" />

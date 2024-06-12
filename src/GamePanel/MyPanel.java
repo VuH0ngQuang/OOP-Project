@@ -73,6 +73,7 @@ public class MyPanel extends JPanel implements Runnable {
           player = new Player(this, keyMoving, 1, 1, 4, 3, 3);
           // play background music
           playMusic(0);
+          ui.playTime=0;
 
      }
 

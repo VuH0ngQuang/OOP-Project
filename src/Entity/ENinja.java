@@ -11,7 +11,7 @@ public class ENinja extends Entity {
         super(mp);
         type = 1;
         name = "ENinja";
-        set_speed(3);
+        set_speed(1);
         maxLife = 1;
         life = maxLife;
         solidArea = new Rectangle();
